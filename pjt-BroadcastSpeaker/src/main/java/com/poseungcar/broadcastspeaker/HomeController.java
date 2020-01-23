@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 /**
  * Handles requests for the application home page.
  */
@@ -30,23 +32,22 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String home(
-			@RequestHeader(value="Host") String host,			
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+	public String home(	/*		@RequestHeader(value="Host") String host,			
 			@RequestHeader(value="Content-Type") String contentType,
 			@RequestHeader(value="Accept") String accept,
 			@RequestHeader(value="User-Charset") String userCharset,
 			@RequestHeader(value="SignatureCEK") String signatureCEK,
 			@RequestBody List<Map<String,String>> json,
-			Model model) {
+			Model model*/) {
 		
 			
 		
 
 		
-			model.addAttribute(json);
 		
-		return "home";
+		
+		return "Hello world";
 	}
 	
 }
