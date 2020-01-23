@@ -1,7 +1,9 @@
 package com.poseungcar.broadcastspeaker;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -33,7 +35,7 @@ public class HomeController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-	public String home(	/*		@RequestHeader(value="Host") String host,			
+	public List<Map<String,String>> home(	/*		@RequestHeader(value="Host") String host,			
 			@RequestHeader(value="Content-Type") String contentType,
 			@RequestHeader(value="Accept") String accept,
 			@RequestHeader(value="User-Charset") String userCharset,
@@ -43,11 +45,15 @@ public class HomeController {
 		
 			
 		
-
+		List<Map<String,String>> json = new ArrayList<Map<String,String>>();
+		Map<String,String> node = new HashMap<String, String>();
+		
+		node.put("key", "value");
+		json.add(node);
 		
 		
 		
-		return "Hello world";
+		return json;
 	}
 	
 }
