@@ -129,7 +129,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- AWS transcribe, polly -->
+		<!-- AWS transcribe, polly
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>transcribe</artifactId>
@@ -144,20 +144,20 @@
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>polly</artifactId>
 		</dependency>
-		 
+		  -->
 		
-		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-polly -->
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-polly 
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-polly</artifactId>
 			<version>1.11.77</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.googlecode.soundlibs/jlayer -->
+		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/com.googlecode.soundlibs/jlayer 
 		<dependency>
 			<groupId>com.googlecode.soundlibs</groupId>
 			<artifactId>jlayer</artifactId>
 			<version>1.0.1-1</version>
-		</dependency>
+		</dependency>-->
 		
 		<!-- jdbc mybatis -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
