@@ -35,14 +35,12 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/")
-	public HashMap<String, Object> home(/*
-			@RequestBody List<Map<String,String>> json,
-			Model model*/) {
+	public HashMap<String, Object> home(
+			@RequestBody HasMap<String, Object> map) {
 		
 			
 	
-		HashMap<String, Object> map = new HashMap<String, Object>();
-	      map.put("abc", "ddd");
+
 	      return map;
 		
 		
