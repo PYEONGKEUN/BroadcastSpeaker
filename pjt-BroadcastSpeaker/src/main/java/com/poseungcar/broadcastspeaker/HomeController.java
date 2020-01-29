@@ -40,7 +40,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/extension", method= RequestMethod.POST, produces = "application/json" )
-	@ResponseBody public ResponseEntity<MyExtensionMessage> weather (@RequestBody Map<String, Object> map)	{
+	@ResponseBody public ResponseEntity<MyExtensionMessage> call (@RequestBody Map<String, Object> map)	{
 		Map m = (HashMap)map.get("request"); 
 		String type = (String) m.get("type");
 		MyExtensionMessage mm = null;
@@ -56,16 +56,22 @@ public class HomeController {
 			Map slots = (HashMap) intent.get("slots");
 			String placesName = ""; 
 			String placesValue = "";
+			String namesName = ""; 
+			String namesValue = "";
+			String ranksName = ""; 
+			String ranksValue = "";
 			if (intentName.equals("call")) { 
 				if (slots != null) { 
 					Map placesMap = (HashMap) slots.get("PLACES");
 					Map namesMap = (HashMap) slots.get("NAMES"); 
-					Map panksMap = (HashMap) slots.get("RANKS"); 
+					Map ranksMap = (HashMap) slots.get("RANKS"); 
 					placesName = (String) placesMap.get("name"); 
 					placesValue = (String) placesMap.get("value"); 
-					System.out.println("slotName===" + placesName); 
-					System.out.println("slotValue===" + placesValue); 
-				} mm= new MyExtensionMessage("call", placesValue + "로 오세요.", true, "PlainText");
+					namesName = (String) namesMap.get("name");
+					namesValue = (String) namesMap.get("value");
+					ranksName = (String) ranksMap.get("name"); 
+					ranksValue = (String) ranksMap.get("value");
+				} mm= new MyExtensionMessage("call", namesName +ranksName +placesValue + "로 오세요.", true, "PlainText");
 
 				// Built-in Intent		처리
 			} else if (intentName.equals("Clova.YesIntent")) { 
