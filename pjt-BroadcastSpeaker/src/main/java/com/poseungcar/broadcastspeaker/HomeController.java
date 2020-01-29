@@ -54,16 +54,18 @@ public class HomeController {
 			Map intent = (HashMap) m.get("intent"); 
 			String intentName = (String) intent.get("name");
 			Map slots = (HashMap) intent.get("slots");
-			String slotName = ""; 
-			String slotValue = "";
-			if (intentName.equals("turnOnIntent"))
-			{ 
+			String placesName = ""; 
+			String placesValue = "";
+			if (intentName.equals("call")) { 
 				if (slots != null) { 
-					Map myslot = (HashMap) slots.get("homeSlotType"); 
-					slotName = (String) myslot.get("name"); 
-					slotValue = (String) myslot.get("value"); System.out.println("slotName===" + slotName); 
-					System.out.println("slotValue===" + slotValue); 
-				} mm= new MyExtensionMessage("turnOnIntent", slotValue + "의 전등을 켰습니다. ", true, "PlainText");
+					Map placesMap = (HashMap) slots.get("PLACES");
+					Map namesMap = (HashMap) slots.get("NAMES"); 
+					Map panksMap = (HashMap) slots.get("RANKS"); 
+					placesName = (String) placesMap.get("name"); 
+					placesValue = (String) placesMap.get("value"); 
+					System.out.println("slotName===" + placesName); 
+					System.out.println("slotValue===" + placesValue); 
+				} mm= new MyExtensionMessage("call", placesValue + "로 오세요.", true, "PlainText");
 
 				// Built-in Intent		처리
 			} else if (intentName.equals("Clova.YesIntent")) { 
