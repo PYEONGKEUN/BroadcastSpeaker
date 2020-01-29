@@ -36,7 +36,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/")
 	public HashMap<String, Object> home(
-			@RequestBody HasMap<String, Object> map) {
+			@RequestBody HashMap<String, Object> map) {
 		
 			
 	
