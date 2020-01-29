@@ -34,15 +34,10 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@ResponseBody
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public HashMap<String, Object> home(			@RequestHeader(value="Host") String host,			
-			@RequestHeader(value="Content-Type") String contentType,
-			@RequestHeader(value="Accept") String accept,
-			@RequestHeader(value="User-Charset") String userCharset,
-			@RequestHeader(value="SignatureCEK") String signatureCEK,
+	@RequestMapping(value = "/")
+	public HashMap<String, Object> home(/*
 			@RequestBody List<Map<String,String>> json,
-			Model model) {
+			Model model*/) {
 		
 			
 	
