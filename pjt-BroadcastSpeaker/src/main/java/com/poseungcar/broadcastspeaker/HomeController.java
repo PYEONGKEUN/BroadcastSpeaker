@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Handles requests for the application home page.
  */
-@Controller
+@RestController
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -34,26 +35,25 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-	public List<Map<String,String>> home(	/*		@RequestHeader(value="Host") String host,			
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public List<Map<String,String>> home(			@RequestHeader(value="Host") String host,			
 			@RequestHeader(value="Content-Type") String contentType,
 			@RequestHeader(value="Accept") String accept,
 			@RequestHeader(value="User-Charset") String userCharset,
 			@RequestHeader(value="SignatureCEK") String signatureCEK,
 			@RequestBody List<Map<String,String>> json,
-			Model model*/) {
+			Model model) {
 		
 			
-		
-		List<Map<String,String>> json = new ArrayList<Map<String,String>>();
-		Map<String,String> node = new HashMap<String, String>();
-		
-		node.put("key", "value");
-		json.add(node);
+	
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//	      map.put("abc", "ddd");
+	      return json;
 		
 		
 		
-		return json;
+		
+		
 	}
 	
 }
