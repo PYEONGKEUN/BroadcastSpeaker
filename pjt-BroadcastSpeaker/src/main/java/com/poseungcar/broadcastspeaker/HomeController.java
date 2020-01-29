@@ -36,7 +36,7 @@ public class HomeController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Map<String,String>> home(			@RequestHeader(value="Host") String host,			
+	public HashMap<String, Object> home(			@RequestHeader(value="Host") String host,			
 			@RequestHeader(value="Content-Type") String contentType,
 			@RequestHeader(value="Accept") String accept,
 			@RequestHeader(value="User-Charset") String userCharset,
@@ -46,9 +46,9 @@ public class HomeController {
 		
 			
 	
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//	      map.put("abc", "ddd");
-	      return json;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	      map.put("abc", "ddd");
+	      return map;
 		
 		
 		
