@@ -25,9 +25,10 @@ public class MyExtensionMessage {
 		myResponseValue.put("type", type);
 		myResponseValue.put("lang", "ko");
 		myResponseValue.put("value", message);
-		if(!session)
-		{ sessionAttributes.put("intent", INTENT_NAME);
-		} MyResponse response = new MyResponse();
+		if(!session){
+			sessionAttributes.put("intent", INTENT_NAME);
+		} 
+		MyResponse response = new MyResponse();
 		response.shouldEndSession = session;
 		response.outputSpeech.put("type", "SimpleSpeech");
 		response.outputSpeech.put("values", myResponseValue);
@@ -39,4 +40,4 @@ public class MyExtensionMessage {
 		public ArrayList<String>  directives = new ArrayList<String>(); 
 		public boolean shouldEndSession = false; 
 	} 
-	}
+}

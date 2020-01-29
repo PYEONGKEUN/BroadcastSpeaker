@@ -47,7 +47,7 @@ public class HomeController {
 		if(type.equals("LaunchRequest"))
 		{
 			// extension 시작
-			mm = new MyExtensionMessage("turnOnIntent", "안녕 짱구 박사를 시작합니다. 제어하려는 전등을 말씀 하세요. ", false, "PlainText"); 
+			mm = new MyExtensionMessage("turnOnIntent", "스마트 방송스피커를 시작합니다. 사람을 불러주세요 ", false, "PlainText"); 
 		}
 		else if (type.equals("IntentRequest")) { 
 			// extension의 인텐트 시작
@@ -74,14 +74,14 @@ public class HomeController {
 				mm = new MyExtensionMessage(intentName, "노 라고 하셨나요?", true, "PlainText");
 
 			} else if (intentName.equals("Clova.GuideIntent")) {
-				mm = new MyExtensionMessage("hearTestIntent", "부산 날씨는 어때라고 해보세요", false, "PlainText");
+				mm = new MyExtensionMessage("hearTestIntent", "나평근 손님 사장실로 불러줘. 라고 해보세요.", false, "PlainText");
 			} else if (intentName.equals("Clova.CancelIntent")) { 
-				mm = new MyExtensionMessage("hearTestIntent", "짱구 박사 실행을 취소합니다.안녕", true, "PlainText");
+				mm = new MyExtensionMessage("hearTestIntent", "스마트 방송 스피커 실행을 취소합니다.안녕", true, "PlainText");
 
 			}
 		} else if (type.equals("SessionEndedRequest")){
 			// extension 종료
-			mm = new MyExtensionMessage("turnOnIntent", "짱구 박사를 종료합니다.", false, "PlainText");
+			mm = new MyExtensionMessage("turnOnIntent", "스마트 방송 스피커를 종료합니다.", false, "PlainText");
 		}
 		return new ResponseEntity<MyExtensionMessage>(mm, HttpStatus.OK);
 	}
