@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -92,6 +93,14 @@ public class HomeController {
 			mm = new MyExtensionMessage("turnOnIntent", "스마트 방송 스피커를 종료합니다.", false, "PlainText");
 		}
 		return new ResponseEntity<MyExtensionMessage>(mm, HttpStatus.OK);
+	}
+	@RequestMapping(value = "/ip", method= RequestMethod.POST, produces = "application/json" )
+	@ResponseBody String getIp (@RequestBody Map<String, Object> map, HttpServletRequest request)	{
+		
+        String ip = request.getHeader("X-FORWARDED-FOR");
+        if (ip == null)
+            ip = request.getRemoteAddr();
+		return ip;
 	}
 
 }
