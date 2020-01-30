@@ -97,10 +97,13 @@ public class HomeController {
 	@RequestMapping(value = "/ip", method= RequestMethod.POST, produces = "application/json" )
 	@ResponseBody String getIp (@RequestBody Map<String, Object> map, HttpServletRequest request)	{
 		
-        String ip = request.getHeader("X-FORWARDED-FOR");
-        if (ip == null)
-            ip = request.getRemoteAddr();
-		return ip;
+        String remoteIp = request.getHeader("X-FORWARDED-FOR");
+        String remoteHost = request.getRemoteHost().toString();
+        int remotePort = request.getRemotePort();
+        if (remoteIp == null)
+        	remoteIp = request.getRemoteAddr();
+        String result = "client addr : "+ remoteIp+":"+remotePort+"   remote Host : "+remoteHost;
+		return result;
 	}
 
 }
