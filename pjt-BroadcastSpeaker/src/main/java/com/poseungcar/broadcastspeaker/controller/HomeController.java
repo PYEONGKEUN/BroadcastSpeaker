@@ -80,7 +80,7 @@ public class HomeController {
 					numberName = (String) namesMap.get("name");
 					numberValue = (String) namesMap.get("value");
 				} 
-				mm= new MyExtensionMessage("call", numberValue +"번 손님" +placesValue + "로 와주세요.", true, "PlainText");
+				mm= new MyExtensionMessage("call", numberValue +"번 손님 " +placesValue + "로 와주세요.", true, "PlainText");
 				String msg = numberValue +"번 손님" +placesValue + "로 와주세요.";
 				ttsMP3(msg);
 				// Built-in Intent		처리
@@ -127,7 +127,7 @@ public class HomeController {
 	            con.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clientId);
 	            con.setRequestProperty("X-NCP-APIGW-API-KEY", clientSecret);
 	            // post request
-	            String postParams = "speaker=nara&volume=0&speed=0&pitch=0&emotion=0&format=mp3&text=" + text;
+	            String postParams = "speaker=nara&volume=0&speed=1&pitch=0&emotion=0&format=mp3&text=" + text;
 	            con.setDoOutput(true);
 	            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 	            wr.writeBytes(postParams);
