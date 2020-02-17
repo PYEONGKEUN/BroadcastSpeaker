@@ -116,8 +116,8 @@ public class HomeController {
 	
 	
 	public void ttsMP3(String msg) {
-		String clientId = "YOUR_CLIENT_ID";//애플리케이션 클라이언트 아이디값";
-        String clientSecret = "YOUR_CLIENT_SECRET";//애플리케이션 클라이언트 시크릿값";
+		String clientId = "r0c2byh2l0";//애플리케이션 클라이언트 아이디값";
+        String clientSecret = "tzYERkpB8SYcg9e6GVQoIDmVtHpx4YyE5J3pncPK";//애플리케이션 클라이언트 시크릿값";
         try {
             String text = URLEncoder.encode(msg, "UTF-8"); // 13자
             String apiURL = "https://naveropenapi.apigw.ntruss.com/voice/v1/tts";
