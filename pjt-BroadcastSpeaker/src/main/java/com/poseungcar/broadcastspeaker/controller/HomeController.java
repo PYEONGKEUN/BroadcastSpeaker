@@ -57,24 +57,20 @@ public class HomeController {
 			Map slots = (HashMap) intent.get("slots");
 			String placesName = ""; 
 			String placesValue = "";
-			String namesName = ""; 
-			String namesValue = "";
-			String ranksName = ""; 
-			String ranksValue = "";
+			String numberName = ""; 
+			String numberValue = "";
 			if (intentName.equals("call")) { 
 				if (slots != null) { 
 					Map placesMap = (HashMap) slots.get("PLACES");
-					Map namesMap = (HashMap) slots.get("NAMES"); 
-					Map ranksMap = (HashMap) slots.get("RANKS");
+					Map namesMap = (HashMap) slots.get("NUMBER"); 
+
 					
 					placesName = (String) placesMap.get("name"); 
 					placesValue = (String) placesMap.get("value"); 
-					namesName = (String) namesMap.get("name");
-					namesValue = (String) namesMap.get("value");
-					ranksName = (String) ranksMap.get("name"); 
-					ranksValue = (String) ranksMap.get("value");
+					numberName = (String) namesMap.get("name");
+					numberValue = (String) namesMap.get("value");
 				} 
-				mm= new MyExtensionMessage("call", namesValue +ranksValue +placesValue + "로 오세요.", true, "PlainText");
+				mm= new MyExtensionMessage("call", numberValue +"번 손님" +placesValue + "로 와주세요.", true, "PlainText");
 
 				// Built-in Intent		처리
 			} else if (intentName.equals("Clova.YesIntent")) { 
@@ -83,7 +79,7 @@ public class HomeController {
 				mm = new MyExtensionMessage(intentName, "노 라고 하셨나요?", true, "PlainText");
 
 			} else if (intentName.equals("Clova.GuideIntent")) {
-				mm = new MyExtensionMessage("hearTestIntent", "나평근 손님 사장실로 불러줘. 라고 해보세요.", false, "PlainText");
+				mm = new MyExtensionMessage("hearTestIntent", "1번 손님 사장실로 불러줘. 라고 해보세요.", false, "PlainText");
 			} else if (intentName.equals("Clova.CancelIntent")) { 
 				mm = new MyExtensionMessage("hearTestIntent", "스마트 방송 스피커 실행을 취소합니다.안녕", true, "PlainText");
 
