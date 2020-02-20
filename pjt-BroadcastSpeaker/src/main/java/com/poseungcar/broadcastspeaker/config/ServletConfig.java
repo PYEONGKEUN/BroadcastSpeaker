@@ -17,11 +17,11 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = { "com.poseungcar.broadcastspeaker.controller" })
 public class ServletConfig implements WebMvcConfigurer {
 	@Value("${uploads.location}")
-    private String uploadsLocation;
-    @Value("${uploads.uri_path}")
-    private String uploadsUriPath;
-	
-	
+	private String uploadsLocation;
+	@Value("${uploads.uri_path}")
+	private String uploadsUriPath;
+
+
 	private final int MAX_SIZE = 10 * 1024 * 1024;
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -37,18 +37,19 @@ public class ServletConfig implements WebMvcConfigurer {
 		//mapping="/resources/**" locations=/resources/
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 		registry.addResourceHandler(uploadsUriPath+"/**").addResourceLocations("file://"+uploadsLocation);
-		
+
 	}
 
-	   @Bean
-	   public MultipartResolver multipartResolver() {
-	      CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-	      multipartResolver.setMaxUploadSize(MAX_SIZE); // 10MB
-	      multipartResolver.setMaxUploadSizePerFile(MAX_SIZE); // 10MB
-	      multipartResolver.setMaxInMemorySize(0);
-	      return multipartResolver;
-	   }
-	
+	@Bean
+	public MultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(MAX_SIZE); // 10MB
+		multipartResolver.setMaxUploadSizePerFile(MAX_SIZE); // 10MB
+		multipartResolver.setMaxInMemorySize(0);
+		return multipartResolver;
+	}
 
-	
+
+
+
 }
