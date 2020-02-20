@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -31,7 +32,7 @@ public class RootConfig {
 	public DataSource dataSource() {
 		DataSource ds=new DataSource();
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://itbuddy.iptime.org:8233/broadcastspeaker"); 
+		ds.setUrl("jdbc:mysql://itbuddy.iptime.org:8233/codehouse"); 
 		ds.setUsername("yuhan"); 
 		ds.setPassword("yuhan1234"); 
 		ds.setInitialSize(2);

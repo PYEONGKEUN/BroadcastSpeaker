@@ -276,6 +276,27 @@
 		<!-- https://mvnrepository.com/artifact/com.googlecode.soundlibs/jlayer 
 			<dependency> <groupId>com.googlecode.soundlibs</groupId> <artifactId>jlayer</artifactId> 
 			<version>1.0.1-1</version> </dependency> -->
+		<!-- Spring WebSocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- Spring Message STOMP -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.webjars/stomp-websocket -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>stomp-websocket</artifactId>
+			<version>2.3.3</version>
+		</dependency>
+
 
 
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poseungcar.broadcastspeaker.DAO.IMemberDAO">
+
+    <select id="select" resultType="com.poseungcar.broadcastspeaker.DTO.Member">
+        SELECT *
+        FROM member
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="mem_id != null">AND mem_id=#{mem_id}</if>
+            <if test="mem_nickname != null">AND mem_nickname=#{mem_nickname}</if>
+            <if test="mem_pw != null">AND mem_pw=#{mem_pw}</if>
+            <if test="mem_email != null">AND mem_email=#{mem_email}</if>
+        </trim>
+
+    </select>
+
+    <update id="update" parameterType="com.poseungcar.broadcastspeaker.DTO.Member" >
+        UPDATE member
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mem_nickname != null">mem_nickname=#{mem_nickname},</if>
+            <if test="mem_pw != null">mem_pw=#{mem_pw},</if>
+            <if test="mem_email != null">mem_email=#{mem_email},</if>
+            <if test="mem_img != null">mem_img=#{mem_img},</if>
+        </trim>
+        WHERE mem_id=#{mem_id}
+    </update>
+
+    <insert id="insert" parameterType="com.poseungcar.broadcastspeaker.DTO.Member" > 
+        INSERT INTO member(mem_id,mem_nickname,mem_pw,mem_email,mem_img)
+        values(#{mem_id},#{mem_nickname},#{mem_pw},#{mem_email},#{mem_img})
+    </insert>
+
+</mapper>
