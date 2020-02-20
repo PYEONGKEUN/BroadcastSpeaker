@@ -3,27 +3,35 @@ package com.poseungcar.broadcastspeaker.controller;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Queue;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,11 +39,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage;
+import com.poseungcar.broadcastspeaker.util.TimeLib;
 
 
 
@@ -47,6 +57,8 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+	Queue<String> queue = new LinkedList<>(); 
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -139,8 +151,10 @@ public class HomeController {
 	                InputStream is = con.getInputStream();
 	                int read = 0;
 	                byte[] bytes = new byte[1024];
-	                // 랜덤한 이름으로 mp3 파일 생성
-	                String tempname = Long.valueOf(new Date().getTime()).toString();
+	                // 시간으로 이름 생성
+	                String tempname = TimeLib.getCurrDateTime();
+	                //큐에 저장
+	                queue.offer(tempname);
 	                File f = new File("/opt/clovatest/"+tempname + ".mp3");
 	                f.createNewFile();
 	                OutputStream outputStream = new FileOutputStream(f);
@@ -162,6 +176,19 @@ public class HomeController {
 	            System.out.println(e);
 	        }
 	    
+	}
+	
+	@RequestMapping(value = "/download", method = RequestMethod.GET)
+	public ResponseEntity<InputStreamResource> download () throws IOException{
+		// 큐로 부터 파일 이름을 호출
+		String fileName = queue.poll();
+		File file = new File("/opt/clovatest/"+fileName + ".mp3");
+		// 스트리밍 생성
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-disposition", "attachment; filename="+fileName);
+		return ResponseEntity.ok().headers(headers).contentLength(file.length())
+				.contentType(MediaType.parseMediaType("application/octet-stream"))
+				.body(new InputStreamResource(new FileInputStream(file)));
 	}
 
 }
