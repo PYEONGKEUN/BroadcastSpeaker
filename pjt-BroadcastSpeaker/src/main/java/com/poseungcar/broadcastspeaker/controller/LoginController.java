@@ -86,14 +86,16 @@ public class LoginController {
 		member.setMem_id(id);
 		member.setMem_pw(pw);
 		
-
-		if(memberService.loginCookie(member, cookie)) {
+		
+		if(memberService.login(member, session)) {
             session.setAttribute("memberinfo", member);
             result.put(member, "true");
 		}else {
             session.invalidate(); //로그인 성공시에만 세션 아이디가 안드로이드로 넘어감.
             result.put(null, "false");
 		}		
+
+
 		return result;
 		
 	}
