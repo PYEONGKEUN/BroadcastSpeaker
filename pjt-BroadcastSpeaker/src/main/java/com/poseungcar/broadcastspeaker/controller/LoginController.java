@@ -68,14 +68,14 @@ public class LoginController {
 	//안드로이드에서 사용할 로그인 
 	
 	@ResponseBody
-	@RequestMapping(value = "/and.login.action", method = RequestMethod.POST)
-	public Map<Object, String> loginAndAction(
+	@RequestMapping(value = "/loginaction", method = RequestMethod.POST)
+	public Map<String, Boolean> loginAndAction(   
 			HttpServletRequest request, 
 			HttpSession session, 
 			@CookieValue(value="storeIdCookie", required = false) Cookie cookie ) {
 		
 
-		Map<Object, String> result = new HashMap<Object,String>();
+		Map<String, Boolean> result = new HashMap<String, Boolean>();
 		
 		logger.info("Do Login");
 		String id = request.getParameter("id");
@@ -89,10 +89,10 @@ public class LoginController {
 		
 		if(memberService.login(member, session)) {
             session.setAttribute("memberinfo", member);
-            result.put(member, "true");
+            result.put("login", true);
 		}else {
             session.invalidate(); //로그인 성공시에만 세션 아이디가 안드로이드로 넘어감.
-            result.put(null, "false");
+            result.put("login", false);
 		}		
 
 
