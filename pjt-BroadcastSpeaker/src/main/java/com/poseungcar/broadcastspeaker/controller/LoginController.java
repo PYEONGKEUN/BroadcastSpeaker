@@ -68,7 +68,7 @@ public class LoginController {
 	//안드로이드에서 사용할 로그인 
 	
 	@ResponseBody
-	@RequestMapping(value = "/andlogin", method = RequestMethod.POST)
+	@RequestMapping(value = "/and.login.action", method = RequestMethod.POST)
 	public Map<Object, String> loginAndAction(
 			HttpServletRequest request, 
 			HttpSession session, 

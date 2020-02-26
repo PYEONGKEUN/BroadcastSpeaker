@@ -18,7 +18,7 @@ public class TimeLib {
     public static String getCurrDateTime(){
         Date dt = new java.util.Date();
 
-        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 
         String currentTime = sdf.format(dt);
 
