@@ -50,6 +50,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/extension", method= RequestMethod.POST, produces = "application/json" )
 	@ResponseBody public ResponseEntity<MyExtensionMessage> call (@RequestBody Map<String, Object> map)	{
 		Map<String, Object> m = (HashMap<String, Object>)map.get("request"); 
