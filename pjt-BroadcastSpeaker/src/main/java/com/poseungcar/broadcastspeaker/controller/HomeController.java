@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -83,6 +84,7 @@ public class HomeController {
 			String numberValue = "";
 			if (intentName.equals("call")) { 
 				if (slots != null) { 
+					// 인터렉션 모델에서의 슬롯 이름과 같아야 한다.
 					Map placesMap = (HashMap) slots.get("PLACES");
 					Map namesMap = (HashMap) slots.get("NUMBER"); 
 
@@ -178,6 +180,16 @@ public class HomeController {
 	    
 	}
 	
+	@RequestMapping(value = "/getaud", method = RequestMethod.GET)
+	public Map<String, String> getAudio (HttpRequest request) throws IOException{
+		Map<String,String> result = new HashMap<>();
+		
+		
+		
+		
+		return result;
+	}
+	
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
 	public ResponseEntity<InputStreamResource> download () throws IOException{
 		// 큐로 부터 파일 이름을 호출
@@ -185,7 +197,7 @@ public class HomeController {
 		File file = new File("/opt/clovatest/"+fileName + ".mp3");
 		// 스트리밍 생성
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-disposition", "attachment; filename="+fileName);
+		headers.add("Content-disposition", "attachment; filename="+fileName+".mp3");
 		return ResponseEntity.ok().headers(headers).contentLength(file.length())
 				.contentType(MediaType.parseMediaType("application/octet-stream"))
 				.body(new InputStreamResource(new FileInputStream(file)));

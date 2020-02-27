@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -72,14 +73,18 @@ public class LoginController {
 	public Map<String, Boolean> loginAndAction(   
 			HttpServletRequest request, 
 			HttpSession session, 
-			@CookieValue(value="storeIdCookie", required = false) Cookie cookie ) {
+			@CookieValue(value="storeIdCookie", required = false) Cookie cookie,
+			@RequestBody Map<String, Object> map) {
 		
 
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
 		
 		logger.info("Do Login");
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
+//		String id = request.getParameter("id");
+//		String pw = request.getParameter("pw");
+		
+		String id = (String) map.get("id");
+		String pw = (String) map.get("pw");
 		
 		Member member = new Member();
 		
