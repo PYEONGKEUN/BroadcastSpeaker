@@ -20,7 +20,7 @@ public class ServletConfig implements WebMvcConfigurer {
 	private String uploadsUriPath;
 
 
-	private final int MAX_SIZE = 10 * 1024 * 1024;
+	//private final int MAX_SIZE = 10 * 1024 * 1024;
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
