@@ -22,7 +22,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @ComponentScan(basePackages = { "com.poseungcar.broadcastspeaker.service" })
 @ComponentScan(basePackages = {"com.poseungcar.broadcastspeaker.serviceImpl"})
-@MapperScan(basePackages = { "mapper" })
+@MapperScan(basePackages = { "com.poseungcar.broadcastspeaker.DAO" })
+
 
 @EnableScheduling
 @EnableTransactionManagement

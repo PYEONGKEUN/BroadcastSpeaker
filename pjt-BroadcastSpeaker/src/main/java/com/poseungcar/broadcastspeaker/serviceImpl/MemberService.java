@@ -34,8 +34,8 @@ public class MemberService implements IMemberService{
 
 		boolean result = false;
 		
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        member.setMem_pw(passwordEncoder.encode(member.getMem_pw()));
+        //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        //member.setMem_pw(passwordEncoder.encode(member.getMem_pw()));
 
 
 		if(member.getMem_id() == null || member.getMem_pw() == null){
@@ -135,8 +135,8 @@ public class MemberService implements IMemberService{
 	@Transactional
 	public int joinUser(Member member) {
 		// 비밀번호 암호화
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        member.setMem_pw(passwordEncoder.encode(member.getMem_pw()));
+        //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        //member.setMem_pw(passwordEncoder.encode(member.getMem_pw()));
         memberDAO.insert(member);
         
         return memberDAO.insert(member);
