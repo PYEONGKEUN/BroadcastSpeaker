@@ -16,6 +16,7 @@ public interface IMemberService {
     public boolean logout(HttpSession session);
     public boolean isLogin(HttpSession session);
     public boolean idIsExist(Member member);
+    public int joinUser(Member member);
     
     //for android hybrid app
     public boolean loginCookie(Member member, Cookie cookie);

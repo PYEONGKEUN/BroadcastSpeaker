@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.poseungcar.broadcastspeaker.DAO.IMemberDAO;
 import com.poseungcar.broadcastspeaker.DTO.Member;
@@ -31,6 +33,9 @@ public class MemberService implements IMemberService{
 		// TODO Auto-generated method stub
 
 		boolean result = false;
+		
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        member.setMem_pw(passwordEncoder.encode(member.getMem_pw()));
 
 
 		if(member.getMem_id() == null || member.getMem_pw() == null){
@@ -126,6 +131,15 @@ public class MemberService implements IMemberService{
 
 
 				return result;
+	}
+	@Transactional
+	public int joinUser(Member member) {
+		// 비밀번호 암호화
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        member.setMem_pw(passwordEncoder.encode(member.getMem_pw()));
+        memberDAO.insert(member);
+        
+        return memberDAO.insert(member);
 	}
 
 

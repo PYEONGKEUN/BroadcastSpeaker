@@ -86,15 +86,13 @@ public class HomeController {
 				if (slots != null) { 
 					// 인터렉션 모델에서의 슬롯 이름과 같아야 한다.
 					Map placesMap = (HashMap) slots.get("PLACES");
-					Map namesMap = (HashMap) slots.get("NUMBER"); 
-
-					
+					Map namesMap = (HashMap) slots.get("NUMBER"); 					
 					placesName = (String) placesMap.get("name"); 
 					placesValue = (String) placesMap.get("value"); 
 					numberName = (String) namesMap.get("name");
 					numberValue = (String) namesMap.get("value");
 				} 
-				mm= new MyExtensionMessage("call", numberValue +"번 손님 " +placesValue + "로 와주세요.", true, "PlainText");
+				mm= new MyExtensionMessage("call", "차량번호 "+numberValue +"번 소유주님 " +placesValue + "로 와주세요.", true, "PlainText");
 				String msg = numberValue +"번 손님" +placesValue + "로 와주세요.";
 				ttsMP3(msg);
 				// Built-in Intent		처리
@@ -181,9 +179,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/getaud", method = RequestMethod.GET)
-	public Map<String, String> getAudio (HttpRequest request) throws IOException{
+	public Map<String, String> getAudio (@RequestBody Map<String, Object> map) throws IOException{
 		Map<String,String> result = new HashMap<>();
-		
+	
 		
 		
 		
