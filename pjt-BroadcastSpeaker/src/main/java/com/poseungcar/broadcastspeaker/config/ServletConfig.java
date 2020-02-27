@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.poseungcar.broadcastspeaker.controller" })
+@PropertySource({"classpath:profiles/${spring.profiles.active}/application.properties"})
 public class ServletConfig implements WebMvcConfigurer {
 	@Value("${uploads.location}")
 	private String uploadsLocation;

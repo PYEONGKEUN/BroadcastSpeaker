@@ -11,40 +11,27 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage;
 import com.poseungcar.broadcastspeaker.util.TimeLib;
 
@@ -56,7 +43,7 @@ import com.poseungcar.broadcastspeaker.util.TimeLib;
 @RestController
 public class HomeController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	Queue<String> queue = new LinkedList<>(); 
 	
@@ -65,7 +52,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/extension", method= RequestMethod.POST, produces = "application/json" )
 	@ResponseBody public ResponseEntity<MyExtensionMessage> call (@RequestBody Map<String, Object> map)	{
-		Map m = (HashMap)map.get("request"); 
+		Map<String, Object> m = (HashMap<String, Object>)map.get("request"); 
 		String type = (String) m.get("type");
 		MyExtensionMessage mm = null;
 		if(type.equals("LaunchRequest"))
@@ -75,9 +62,9 @@ public class HomeController {
 		}
 		else if (type.equals("IntentRequest")) { 
 			// extension의 인텐트 시작
-			Map intent = (HashMap) m.get("intent"); 
+			Map<String, Object> intent = (HashMap<String, Object>) m.get("intent"); 
 			String intentName = (String) intent.get("name");
-			Map slots = (HashMap) intent.get("slots");
+			Map<String, Object> slots = (HashMap<String, Object>) intent.get("slots");
 			String placesName = ""; 
 			String placesValue = "";
 			String numberName = ""; 
@@ -85,8 +72,8 @@ public class HomeController {
 			if (intentName.equals("call")) { 
 				if (slots != null) { 
 					// 인터렉션 모델에서의 슬롯 이름과 같아야 한다.
-					Map placesMap = (HashMap) slots.get("PLACES");
-					Map namesMap = (HashMap) slots.get("NUMBER"); 					
+					Map<String, Object> placesMap = (HashMap<String, Object>) slots.get("PLACES");
+					Map<String, Object> namesMap = (HashMap<String, Object>) slots.get("NUMBER"); 					
 					placesName = (String) placesMap.get("name"); 
 					placesValue = (String) placesMap.get("value"); 
 					numberName = (String) namesMap.get("name");

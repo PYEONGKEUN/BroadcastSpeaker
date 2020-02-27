@@ -1,16 +1,13 @@
 package com.poseungcar.broadcastspeaker.config;
 
 import javax.servlet.Filter;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletRegistration.Dynamic;
-
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer{
 
-	private static int MAX_FILE_ZIZE = 10 * 1024 * 1024;
+	//private static int MAX_FILE_ZIZE = 10 * 1024 * 1024;
 	
 	
 	
