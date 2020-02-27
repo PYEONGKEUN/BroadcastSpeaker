@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,7 +70,7 @@ public class LoginController {
 	//안드로이드에서 사용할 로그인 
 	
 	@ResponseBody
-	@RequestMapping(value = "/loginaction", method = RequestMethod.POST)
+	@PostMapping(value = "/loginaction", consumes = "application/json", produces = "application/json")
 	public Map<String, Boolean> loginAndAction(   
 			HttpServletRequest request, 
 			HttpSession session, 
