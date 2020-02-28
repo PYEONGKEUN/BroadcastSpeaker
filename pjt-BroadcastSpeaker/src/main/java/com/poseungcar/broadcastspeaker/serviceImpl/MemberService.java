@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.poseungcar.broadcastspeaker.DAO.IMemberDAO;
 import com.poseungcar.broadcastspeaker.DTO.Member;
+import com.poseungcar.broadcastspeaker.VO.CallsVO;
 import com.poseungcar.broadcastspeaker.service.IMemberService;
 
 /**
@@ -48,6 +49,14 @@ public class MemberService implements IMemberService{
 				logger.info(member.getMem_id() +" logged in");
 				session.setAttribute("memberInfo", output.get(0));
 				session.setAttribute("status", "login");
+				// 공통 변수에 추가 현재 로그인 사용자의 CallsVO가 없을경우 하나 생성
+				if(!CallsVoMap.userCallsVos.containsKey(output.get(0).getMem_id())) {
+					CallsVO callsVO = new CallsVO();
+					callsVO.setUserId(output.get(0).getMem_id());
+					CallsVoMap.userCallsVos.put(output.get(0).getMem_id(), callsVO);
+				}						
+
+				
 				result = true;
 			}else {
 				logger.info(member.getMem_id() +"Password or Id is not correct");

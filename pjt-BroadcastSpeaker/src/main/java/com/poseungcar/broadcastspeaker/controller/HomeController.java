@@ -12,27 +12,38 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poseungcar.broadcastspeaker.DTO.Member;
+import com.poseungcar.broadcastspeaker.VO.CallsVO;
 import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage;
+import com.poseungcar.broadcastspeaker.service.IPlaceHan2EnService;
+import com.poseungcar.broadcastspeaker.serviceImpl.CallsVoMap;
+import com.poseungcar.broadcastspeaker.serviceImpl.PlaceHan2EnService;
 import com.poseungcar.broadcastspeaker.util.TimeLib;
 
 
@@ -42,17 +53,20 @@ import com.poseungcar.broadcastspeaker.util.TimeLib;
  */
 @RestController
 public class HomeController {
-
+	
+	
+	
+	
 	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-	Queue<String> queue = new LinkedList<>(); 
+@Autowired
+IPlaceHan2EnService placeHan2EnService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/extension", method= RequestMethod.POST, produces = "application/json" )
-	@ResponseBody public ResponseEntity<MyExtensionMessage> call (@RequestBody Map<String, Object> map)	{
+	@ResponseBody public ResponseEntity<MyExtensionMessage> call (@RequestBody Map<String, Object> map, HttpSession session)	{
 		Map<String, Object> m = (HashMap<String, Object>)map.get("request"); 
 		String type = (String) m.get("type");
 		MyExtensionMessage mm = null;
@@ -81,8 +95,8 @@ public class HomeController {
 					numberValue = (String) namesMap.get("value");
 				} 
 				mm= new MyExtensionMessage("call", "차량번호 "+numberValue +"번 소유주님 " +placesValue + "로 와주세요.", true, "PlainText");
-				String msg = numberValue +"번 손님" +placesValue + "로 와주세요.";
-				ttsMP3(msg);
+				String msg = "차량번호 "+numberValue +"번 소유주님 " +placesValue + "로 와주세요.";
+				handleCallsVoNttsMP3(msg,session, placesValue);
 				// Built-in Intent		처리
 			} else if (intentName.equals("Clova.YesIntent")) { 
 				mm = new MyExtensionMessage(intentName, "예 라고 하셨나요?", true, "PlainText");
@@ -114,9 +128,10 @@ public class HomeController {
 	}
 	
 	
-	
-	public void ttsMP3(String msg) {
+	//callsVO 큐에 파일이름(경로 X)을 추가하고 TTS를 다운 로드
+	public String handleCallsVoNttsMP3(String msg, HttpSession session, String han) {
 		 String clientId = "quktzpx0ng";//애플리케이션 클라이언트 아이디값";
+		 String result = "";
 	        String clientSecret = "JYlINeOp2s6fNfvxNCLE1IIihw4yyYcXXCxnEltX";//애플리케이션 클라이언트 시크릿값";
 	        try {
 	            String text = URLEncoder.encode(msg, "UTF-8"); // 13자
@@ -142,8 +157,18 @@ public class HomeController {
 	                // 시간으로 이름 생성
 	                String tempname = TimeLib.getCurrDateTime();
 	                //큐에 저장
-	                queue.offer(tempname);
+	                //queue.offer(tempname);
+
+	                // 세션에서 현재 로그인중인 아이디의 정보를 가져온다.
+	                // 공통 공유 자원 CallsVoMap.userCallsVos 에서 해당 계정의 CallsVO 객체를 가져온다
+	                //CallsVO에서 큐 객체를 가지고 처리한다.
+	                Member member = (Member)session.getAttribute("memberInfo");
+	                CallsVO callsVO =CallsVoMap.userCallsVos.get(member.getMem_id());
+	                placeHan2EnService.offer(callsVO, han, tempname);	                
+	                
+	                
 	                File f = new File("/opt/clovatest/"+tempname + ".mp3");
+	                result  = tempname;
 	                f.createNewFile();
 	                OutputStream outputStream = new FileOutputStream(f);
 	                while ((read =is.read(bytes)) != -1) {
@@ -163,26 +188,51 @@ public class HomeController {
 	        } catch (Exception e) {
 	            System.out.println(e);
 	        }
-	    
+	        return result;
 	}
 	
-	@RequestMapping(value = "/getaud", method = RequestMethod.GET)
-	public Map<String, String> getAudio (@RequestBody Map<String, Object> map) throws IOException{
-		Map<String,String> result = new HashMap<>();
-	
+	@ResponseBody
+	@PostMapping(value = "/callcustomer", consumes = "application/json", produces = "application/json")
+	public Map<String, Boolean> loginAndAction(   
+			HttpServletRequest request, 
+			HttpSession session, 
+			@RequestBody Map<String, Object> map) throws Exception {		
+
+		Map<String, Boolean> result = new HashMap<String, Boolean>();
+
+		//메시지 생성
+		String placesValue = (String) map.get("place");
+		String numberValue = (String) map.get("number");		
+		String msg = "차량번호 "+numberValue +"번 소유주님 " +placesValue + "로 와주세요.";
+		//파일명 경로x 확장자 x
+		String tempname = handleCallsVoNttsMP3(msg,session,placesValue);
 		
-		
-		 
-		
-		
-		
+		//CallVos에 추가 
+		Member member = (Member)session.getAttribute("memberInfo");
+        CallsVO callsVO =CallsVoMap.userCallsVos.get(member.getMem_id());
+        placeHan2EnService.offer(callsVO, placesValue, tempname);	
 		return result;
+		
 	}
 	
-	@RequestMapping(value = "/download", method = RequestMethod.GET)
-	public ResponseEntity<InputStreamResource> download () throws IOException{
+	@PostMapping(value = "/download", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<InputStreamResource> download ( 
+			@RequestBody Map<String, Object> map,
+			HttpSession session
+			) throws Exception{
+		
+		
 		// 큐로 부터 파일 이름을 호출
-		String fileName = queue.poll();
+		//String fileName = queue.poll();
+		//String id = (String) map.get("id");
+		String place = (String) map.get("place");
+		
+		
+		
+        Member member = (Member)session.getAttribute("memberInfo");
+        CallsVO callsVO =CallsVoMap.userCallsVos.get(member.getMem_id());
+        
+        String fileName = placeHan2EnService.poll(callsVO, place);
 		File file = new File("/opt/clovatest/"+fileName + ".mp3");
 		// 스트리밍 생성
 		HttpHeaders headers = new HttpHeaders();
