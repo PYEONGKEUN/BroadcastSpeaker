@@ -85,18 +85,23 @@ public class CekController {
 				String msg = "";
 				Map<String, Object> placesMap = null;
 				Map<String, Object> namesMap = null;
+				Map<String, Object> recievedSlots = null;
 
 				//현재 받은 SLOT값들을 전달하면서 재호출
 				if(!slots.containsKey("PLACE")) {
 					msg ="방송할 위치를 알려주세요.";
+					//전달된 SLOT을 CEK에게 다시 전달
 					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
-					
-					result= new MyExtensionMessage("Call", msg, false, "PlainText",namesMap);
+					numberValue = (String) namesMap.get("value");					
+					recievedSlots.put("NUMBER", numberValue);
+					result= new MyExtensionMessage("Call", msg, false, "PlainText",recievedSlots);
 					//현재 받은 SLOT값들을 전달하면서 재호출
 				}else if(!slots.containsKey("NUMBER")) {					
 					msg ="수리완료된 차량번호를 알려주세요.";
-					placesMap = (HashMap<String, Object>) slots.get("PLACE");
-					
+					//전달된 SLOT을 CEK에게 다시 전달
+					placesMap = (HashMap<String, Object>) slots.get("PLACE");				
+					placesValue = (String) placesMap.get("value");
+					recievedSlots.put("PLACE", placesValue);
 					result= new MyExtensionMessage("Call", msg, false, "PlainText",placesMap);
 				}else {
 
@@ -113,6 +118,7 @@ public class CekController {
 					msg = numberValue +"번 차량 수리 완료되었습니다.";
 					result= new MyExtensionMessage("Call", msg, true, "PlainText");
 					ttsService.downloadMP3(msg,session, placesValue);
+					
 					return result;
 				}					
 			} 		
