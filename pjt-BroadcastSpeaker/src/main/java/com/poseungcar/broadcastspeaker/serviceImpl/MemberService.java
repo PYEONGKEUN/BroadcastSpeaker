@@ -18,6 +18,7 @@ import com.poseungcar.broadcastspeaker.DAO.IMemberDAO;
 import com.poseungcar.broadcastspeaker.DTO.Member;
 import com.poseungcar.broadcastspeaker.VO.CallsVO;
 import com.poseungcar.broadcastspeaker.service.IMemberService;
+import com.poseungcar.broadcastspeaker.status.CallsVoMap;
 
 /**
  * LoginService

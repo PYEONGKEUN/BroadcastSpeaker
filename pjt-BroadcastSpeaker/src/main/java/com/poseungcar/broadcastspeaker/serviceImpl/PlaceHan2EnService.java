@@ -36,6 +36,22 @@ public class PlaceHan2EnService implements IPlaceHan2EnService{
 		}else if(place.equals(PLACES[6])) {
 			//창구
 			callsVo.offerwindow(mpUrl);
+		}else if(place.equals("ALL")) {
+			//고객 대기실
+			callsVo.offerCustomerWaitingRoom(mpUrl);
+			//프론트
+			callsVo.offerfront(mpUrl);
+			//사무실
+			callsVo.offeroffice(mpUrl);
+			//휴게실
+			callsVo.offerrestArea(mpUrl);
+			//정비실
+			callsVo.offermaintenanceRoom(mpUrl);
+			//사장실
+			callsVo.offerpresidentOffice(mpUrl);
+			//창구
+			callsVo.offerwindow(mpUrl);
+			
 		}
 	}
 
