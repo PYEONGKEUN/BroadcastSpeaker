@@ -129,14 +129,22 @@ public class CekController {
 				String msg = "";
 				Map<String, Object> placesMap = null;
 				Map<String, Object> namesMap = null;
+				Map<String, Object> recievedSlots = new HashMap<String, Object>();
 
 				if(!slots.containsKey("PLACE")) {
 					msg ="방송할 위치를 알려주세요.";
+					
 					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
+					numberValue = (String) namesMap.get("value");					
+					recievedSlots.put("NUMBER", numberValue);
 					//현재 받은 SLOT값들을 전달하면서 재호출
 					result= new MyExtensionMessage("Call", msg, false, "PlainText",namesMap);
 				}else if(!slots.containsKey("NUMBER")) {
 					msg ="수리완료된 차량번호를 알려주세요.";
+					//전달된 SLOT을 CEK에게 다시 전달
+					placesMap = (HashMap<String, Object>) slots.get("PLACE");				
+					placesValue = (String) placesMap.get("value");
+					recievedSlots.put("PLACE", placesValue);
 					placesMap = (HashMap<String, Object>) slots.get("PLACE");
 					//현재 받은 SLOT값들을 전달하면서 재호출
 					result= new MyExtensionMessage("Call", msg, false, "PlainText",placesMap);
