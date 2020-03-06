@@ -7,7 +7,7 @@ import com.poseungcar.broadcastspeaker.service.IPlaceHan2EnService;
 @Service
 public class PlaceHan2EnService implements IPlaceHan2EnService{
 
-	final private String[] PLACES = {"고객대기실","프론트","사무실","휴게실","정비실","사장실","창구"};
+	final private String[] PLACES = {"고객대기실","프론트","사무실","휴게실","정비실","사장실","창구","전체"};
 	
 	// CallsVO를 쉽게 컨트롤 하기위한 메소드
 	// CallsVO 객체와 
@@ -36,7 +36,7 @@ public class PlaceHan2EnService implements IPlaceHan2EnService{
 		}else if(place.equals(PLACES[6])) {
 			//창구
 			callsVo.offerwindow(mpUrl);
-		}else if(place.equals("ALL")) {
+		}else if(place.equals(PLACES[7])) {
 			//고객 대기실
 			callsVo.offerCustomerWaitingRoom(mpUrl);
 			//프론트

@@ -93,27 +93,76 @@ public class CekController {
 		if (intentName.equals("call")) { 
 			if (slots != null) { 
 				// 인터렉션 모델에서의 슬롯 이름과 같아야 한다.
-				Map<String, Object> placesMap = (HashMap<String, Object>) slots.get("PLACES");
-				Map<String, Object> namesMap = (HashMap<String, Object>) slots.get("NUMBER"); 					
-				placesName = (String) placesMap.get("name"); 
-				placesValue = (String) placesMap.get("value"); 
-				numberName = (String) namesMap.get("name");
-				numberValue = (String) namesMap.get("value");
-			} 
-			
-			//인식된 SLOT으로부터 값 추출
-			String msg = numberValue +"번 차량 수리 완료되었습니다.";
-			result= new MyExtensionMessage("call", msg, true, "PlainText");
-			ttsService.downloadMP3(msg,session, placesValue);			
-			
-			
-			// Built-in Intent	처리
-		} else if (intentName.equals("Clova.YesIntent")) { 
+				String msg = "";
+				Map<String, Object> placesMap = null;
+				Map<String, Object> namesMap = null;
+
+
+				if(!slots.containsKey("PLACE")) {
+					msg ="방송할 위치를 알려주세요.";
+					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
+					//현재 받은 SLOT값들을 전달하면서 재호출
+					result= new MyExtensionMessage("call", msg, true, "PlainText",namesMap);
+				}else if(!slots.containsKey("NUMBER")) {					
+					msg ="수리완료된 차량번호를 알려주세요.";
+					placesMap = (HashMap<String, Object>) slots.get("PLACE");
+					//현재 받은 SLOT값들을 전달하면서 재호출
+					result= new MyExtensionMessage("call", msg, true, "PlainText",placesMap);
+				}else {
+
+					
+					placesMap = (HashMap<String, Object>) slots.get("PLACE");				
+					placesName = (String) placesMap.get("name"); 
+					placesValue = (String) placesMap.get("value");
+					
+					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
+					numberName = (String) namesMap.get("name");
+					numberValue = (String) namesMap.get("value");
+					
+					//인식된 SLOT으로부터 값 추출
+					msg = numberValue +"번 차량 수리 완료되었습니다.";
+					result= new MyExtensionMessage("call", msg, true, "PlainText");
+					ttsService.downloadMP3(msg,session, placesValue);
+				}					
+			} 		
+			// 다시 물을때   
+		}else if (intentName.equals("AddInfo")) { 
+			if (slots != null) { 
+				// 인터렉션 모델에서의 슬롯 이름과 같아야 한다.
+				String msg = "";
+
+				if(!slots.containsKey("PLACE")) {
+					msg ="";
+					result= new MyExtensionMessage("call", msg, true, "PlainText");
+				}else if(!slots.containsKey("NUMBER")) {
+					result= new MyExtensionMessage("call", msg, true, "PlainText");
+				}else {
+					Map<String, Object> placesMap = null;
+					Map<String, Object> namesMap = null;
+					
+					placesMap = (HashMap<String, Object>) slots.get("PLACE");				
+					placesName = (String) placesMap.get("name"); 
+					placesValue = (String) placesMap.get("value");
+					
+										
+					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
+					numberName = (String) namesMap.get("name");
+					numberValue = (String) namesMap.get("value");
+					
+					//인식된 SLOT으로부터 값 추출
+					msg = numberValue +"번 차량 수리 완료되었습니다.";
+					result= new MyExtensionMessage("call", msg, true, "PlainText");
+					ttsService.downloadMP3(msg,session, placesValue);
+				}					
+			}
+		} 
+		// Built-in Intent	처리
+		else if (intentName.equals("Clova.YesIntent")) { 
 			result = new MyExtensionMessage(intentName, "예 라고 하셨나요?", true, "PlainText");
 		} else if (intentName.equals("Clova.NoIntent")) { 
 			result = new MyExtensionMessage(intentName, "아니오 라고 하셨나요?", true, "PlainText");
 		} else if (intentName.equals("Clova.GuideIntent")) {
-			result = new MyExtensionMessage("hearTestIntent", "1234번 차주님 차량 수리 완료되었습니다.", false, "PlainText");
+			result = new MyExtensionMessage("hearTestIntent", "어디에서 몇번 차량 수리완료 라고 말해주세요.", false, "PlainText");
 		} else if (intentName.equals("Clova.CancelIntent")) { 
 			result = new MyExtensionMessage("hearTestIntent", "포승 스피커를 종료합니다.", true, "PlainText");
 		}
