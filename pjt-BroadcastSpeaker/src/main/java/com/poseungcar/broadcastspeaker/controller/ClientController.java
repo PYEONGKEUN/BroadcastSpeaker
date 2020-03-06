@@ -26,9 +26,8 @@ public class ClientController {
 	ITtsService ttsService;
 
 
-	@ResponseBody
 	@PostMapping(value = "/transmit", consumes = "application/json", produces = "application/json")
-	public Map<String, Boolean> transmitHandler(   
+	@ResponseBody public Map<String, Boolean> transmitHandler(   
 			HttpServletRequest request, 
 			HttpSession session, 
 			@RequestBody Map<String, String> map) throws Exception {		
@@ -36,6 +35,9 @@ public class ClientController {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
 
 		//메시지 생성
+		if(map.containsKey("id") || map.containsKey("place") || map.containsKey("number")) {
+			result.put("complete", false);
+		}
 		String id = (String) map.get("id");
 		String place = (String) map.get("place");
 		String number = (String) map.get("number");		
@@ -53,8 +55,8 @@ public class ClientController {
 	
 	
 	@PostMapping(value = "/request", consumes = "application/json", produces = "application/json")
-	public Map<String, String> requestHandler ( 
-			@RequestBody Map<String, Object> map,
+	@ResponseBody public  Map<String, String> requestHandler ( 
+			@RequestBody Map<String, String> map,
 			HttpSession session
 			) throws Exception{
 		
