@@ -64,7 +64,7 @@ public class TtsService implements ITtsService{
 				// 시간으로 이름 생성
 				String fileName = TimeLib.getCurrDateTimeName();
 				result = fileName;
-				String filePath = uploadsLocation+fileName + ".mp3";
+				String filePath = uploadsLocation+"/"+fileName + ".mp3";
 				
 				
 				File f = new File(filePath);

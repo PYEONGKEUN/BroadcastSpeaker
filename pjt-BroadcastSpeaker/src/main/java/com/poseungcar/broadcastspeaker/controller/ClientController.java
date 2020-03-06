@@ -15,6 +15,7 @@ import com.poseungcar.broadcastspeaker.VO.CallsVO;
 import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
 import com.poseungcar.broadcastspeaker.status.CallsVoMap;
+import com.poseungcar.broadcastspeaker.util.CekMsg;
 
 public class ClientController {
 	
@@ -38,7 +39,7 @@ public class ClientController {
 		String id = (String) map.get("id");
 		String place = (String) map.get("place");
 		String number = (String) map.get("number");		
-		String msg = "차량번호 "+number +"번 소유주님 " +place + "로 와주세요.";
+		String msg = CekMsg.msg(number);
 		//파일명 경로x 확장자 x
 		String fileName = ttsService.downloadMP3(msg,session,place);
 

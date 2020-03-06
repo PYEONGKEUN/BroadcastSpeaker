@@ -22,6 +22,7 @@ import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage;
 import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
 import com.poseungcar.broadcastspeaker.status.CallsVoMap;
+import com.poseungcar.broadcastspeaker.util.CekMsg;
 
 
 
@@ -117,7 +118,7 @@ public class CekController {
 					numberValue = (String) namesMap.get("value");
 					
 					//인식된 SLOT으로부터 값 추출
-					msg = numberValue +"번 차량 수리 완료되었습니다.";
+					msg = CekMsg.msg(numberValue);
 					result= new MyExtensionMessage("Call", msg, true, "PlainText");
 					String fileName = ttsService.downloadMP3(msg,session, placesValue);
 					// 테스트용 아이디
@@ -162,7 +163,7 @@ public class CekController {
 					numberValue = (String) namesMap.get("value");
 					
 					//인식된 SLOT으로부터 값 추출
-					msg = numberValue +"번 차량 수리 완료되었습니다.";
+					msg = CekMsg.msg(numberValue);
 					result= new MyExtensionMessage("Call", msg, true, "PlainText");
 					String fileName = ttsService.downloadMP3(msg,session, placesValue);
 				

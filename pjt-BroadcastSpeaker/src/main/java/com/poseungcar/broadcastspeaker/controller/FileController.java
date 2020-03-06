@@ -62,7 +62,7 @@ public class FileController {
 			@PathVariable("fileName") String fileName
 			) throws Exception{				
 
-		File file = new File(uploadsLocation + fileName + ".mp3");
+		File file = new File(uploadsLocation+"/"+fileName + ".mp3");
 
 
 		// 스트리밍 생성
