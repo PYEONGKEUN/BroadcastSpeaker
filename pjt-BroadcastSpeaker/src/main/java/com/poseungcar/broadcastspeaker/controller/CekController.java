@@ -85,7 +85,7 @@ public class CekController {
 				String msg = "";
 				Map<String, Object> placesMap = null;
 				Map<String, Object> namesMap = null;
-				Map<String, Object> recievedSlots = null;
+				Map<String, Object> recievedSlots = new HashMap<String, Object>();
 
 				//현재 받은 SLOT값들을 전달하면서 재호출
 				if(!slots.containsKey("PLACE")) {
