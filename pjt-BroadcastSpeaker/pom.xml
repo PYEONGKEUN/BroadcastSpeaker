@@ -323,17 +323,16 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
-		
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-crypto</artifactId>
-    <version>${org.springframework-version}</version>
-</dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 
-<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-jwt</artifactId>
-    <version>${org.springframework-version}</version>
-</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-jwt</artifactId>
+			<version>1.1.0.RELEASE</version>
+		</dependency>
 
 
 	</dependencies>
