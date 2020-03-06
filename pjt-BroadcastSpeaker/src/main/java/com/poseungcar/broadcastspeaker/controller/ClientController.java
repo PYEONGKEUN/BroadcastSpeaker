@@ -31,7 +31,7 @@ public class ClientController {
 	public Map<String, Boolean> transmitHandler(   
 			HttpServletRequest request, 
 			HttpSession session, 
-			@RequestBody Map<String, Object> map) throws Exception {		
+			@RequestBody Map<String, String> map) throws Exception {		
 
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
 
