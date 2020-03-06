@@ -51,48 +51,9 @@ IPlaceHan2EnService placeHan2EnService;
 	
 	
 	
-	@PostMapping(value = "/request2", consumes = "application/json", produces = "application/json")
-	public Map<String, String> requestHandler ( 
-			@RequestBody Map<String, Object> map,
-			HttpSession session
-			) throws Exception{
-		
-		Map<String, String> result = new HashMap<String, String>();
-		// 큐로 부터 파일 이름을 호출
-		//String fileName = queue.poll();
-		String id = (String) map.get("id");
-		String place = (String) map.get("place");
-		
-		
-		
-        //Member member = (Member)session.getAttribute("memberInfo");
-        //CallsVO callsVO =CallsVoMap.userCallsVos.get(member.getMem_id());
-		if(!CallsVoMap.userCallsVos.containsKey(id)) {			
-			return null; 
-		}
-		
-		CallsVO callsVO =CallsVoMap.userCallsVos.get(id);
-        String fileName = placeHan2EnService.poll(callsVO, place);
-        return result;
-		
-	}
+
+
 	
-	@PostMapping(value = "/download", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<InputStreamResource> stream ( 
-			@RequestAttribute(name = "filename")String fileName
-			) throws Exception{				
-
-		File file = new File("/opt/clovatest/"+fileName + ".mp3");
-		
-		
-		
-		// 스트리밍 생성
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-disposition", "attachment; filename="+fileName+".mp3");
-		return ResponseEntity.ok().headers(headers).contentLength(file.length())
-				.contentType(MediaType.parseMediaType("application/octet-stream"))
-				.body(new InputStreamResource(new FileInputStream(file)));
-	}
-
+	    
 }
 

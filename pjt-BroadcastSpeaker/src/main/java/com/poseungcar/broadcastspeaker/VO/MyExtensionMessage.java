@@ -1,4 +1,4 @@
-package com.poseungcar.broadcastspeaker.VO;
+ package com.poseungcar.broadcastspeaker.VO;
 
 import java.util.ArrayList;
 import java.util.HashMap;

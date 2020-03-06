@@ -11,11 +11,19 @@ import java.util.Date;
  */
 public class TimeLib {
 
-    public TimeLib(){
 
-    }
 
     public static String getCurrDateTime(){
+        Date dt = new java.util.Date();
+
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String currentTime = sdf.format(dt);
+
+        return currentTime;
+        
+    }
+    public static String getCurrDateTimeName(){
         Date dt = new java.util.Date();
 
         SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -27,6 +35,7 @@ public class TimeLib {
     }
     public static void main(String[] args) {
         System.out.println(TimeLib.getCurrDateTime());
+        System.out.println(TimeLib.getCurrDateTimeName());
     }
     
 
