@@ -7,17 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.poseungcar.broadcastspeaker.VO.CallsVO;
 import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
-import com.poseungcar.broadcastspeaker.status.CallsVoMap;
 import com.poseungcar.broadcastspeaker.util.CekMsg;
-@Controller
+
+@RestController
 public class ClientController {
 	
 	@Autowired
@@ -60,8 +59,6 @@ public class ClientController {
 			) throws Exception{
 		
 		Map<String, String> result = null;
-		// 큐로 부터 파일 이름을 호출
-		//String fileName = queue.poll();
 		String id = (String) map.get("id");
 		String place = (String) map.get("place");
 		
