@@ -91,13 +91,13 @@ public class CekController {
 					msg ="방송할 위치를 알려주세요.";
 					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
 					
-					result= new MyExtensionMessage("Call", msg, true, "PlainText",namesMap);
+					result= new MyExtensionMessage("Call", msg, false, "PlainText",namesMap);
 					//현재 받은 SLOT값들을 전달하면서 재호출
 				}else if(!slots.containsKey("NUMBER")) {					
 					msg ="수리완료된 차량번호를 알려주세요.";
 					placesMap = (HashMap<String, Object>) slots.get("PLACE");
 					
-					result= new MyExtensionMessage("Call", msg, true, "PlainText",placesMap);
+					result= new MyExtensionMessage("Call", msg, false, "PlainText",placesMap);
 				}else {
 
 					
@@ -128,12 +128,12 @@ public class CekController {
 					msg ="방송할 위치를 알려주세요.";
 					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
 					//현재 받은 SLOT값들을 전달하면서 재호출
-					result= new MyExtensionMessage("Call", msg, true, "PlainText",namesMap);
+					result= new MyExtensionMessage("Call", msg, false, "PlainText",namesMap);
 				}else if(!slots.containsKey("NUMBER")) {
 					msg ="수리완료된 차량번호를 알려주세요.";
 					placesMap = (HashMap<String, Object>) slots.get("PLACE");
 					//현재 받은 SLOT값들을 전달하면서 재호출
-					result= new MyExtensionMessage("Call", msg, true, "PlainText",placesMap);
+					result= new MyExtensionMessage("Call", msg, false, "PlainText",placesMap);
 				}else {
 				
 					placesMap = (HashMap<String, Object>) slots.get("PLACE");				

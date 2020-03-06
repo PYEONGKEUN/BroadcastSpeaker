@@ -14,12 +14,12 @@ public class MyExtensionMessage {
 			String message,
 			boolean session,
 			String type,
-			Map<String, Object> namesMap){		
+			Map<String, Object> SlotsMap){		
 
 		if(!session) {
 			// 재요청을 위해 현재 받은 Slot의 값을 저장하여 전달.(PLACE 또는 NUMER)
 			sessionAttributes.put("intent", INTENT_NAME);
-			sessionAttributes.putAll(namesMap);
+			sessionAttributes.putAll(SlotsMap);
 		}
 		MyResponse response = new MyResponse();
 		response.shouldEndSession = session;
