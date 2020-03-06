@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.poseungcar.broadcastspeaker.DTO.Member;
 import com.poseungcar.broadcastspeaker.VO.CallsVO;
-import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage;
+import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage3;
 import com.poseungcar.broadcastspeaker.service.IPlaceHan2EnService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
 import com.poseungcar.broadcastspeaker.status.CallsVoMap;

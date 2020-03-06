@@ -1,0 +1,51 @@
+{
+    "version": "0.1.0",
+    "session": {
+        "sessionId": "fe10fb18-7582-494c-8f3a-a0cca253720c",
+        "sessionAttributes": {},
+        "user": {
+            "userId": "UAGfEwJ5SM2YmKCm2ARq5g",
+            "accessToken": "53c33b6d-fd96-4418-aecf-6af1204e1fff"
+        },
+        "new": true
+    },
+    "context": {
+        "System": {
+            "application": {
+                "applicationId": "com.itbuddy.broadcastspeaker"
+            },
+            "user": {
+                "userId": "UAGfEwJ5SM2YmKCm2ARq5g",
+                "accessToken": "53c33b6d-fd96-4418-aecf-6af1204e1fff"
+            },
+            "device": {
+                "deviceId": "f16d809f-5258-4b94-be3e-f080646c25cb",
+                "display": {
+                    "size": "l100",
+                    "orientation": "landscape",
+                    "dpi": 96,
+                    "contentLayer": {
+                        "width": 640,
+                        "height": 360
+                    }
+                }
+            }
+        }
+    },
+    "request": {
+        "type": "IntentRequest",
+        "intent": {
+            "name": "Call",
+            "slots": {
+                "NUMBER": {
+                    "name": "NUMBER",
+                    "value": "1234"
+                },
+                "PLACE": {
+                    "name": "PLACE",
+                    "value": "고객대기실"
+                }
+            }
+        }
+    }
+}

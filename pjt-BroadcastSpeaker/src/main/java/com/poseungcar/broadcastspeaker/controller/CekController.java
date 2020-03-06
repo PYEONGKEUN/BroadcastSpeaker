@@ -1,38 +1,27 @@
 package com.poseungcar.broadcastspeaker.controller;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.poseungcar.broadcastspeaker.DTO.Member;
-import com.poseungcar.broadcastspeaker.VO.CallsVO;
+
 import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage;
 import com.poseungcar.broadcastspeaker.service.IPlaceHan2EnService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
-import com.poseungcar.broadcastspeaker.status.CallsVoMap;
-import com.poseungcar.broadcastspeaker.util.TimeLib;
+
 
 
 /*
@@ -56,7 +45,7 @@ public class CekController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/cek", method= RequestMethod.POST, produces = "application/json" )
-	@ResponseBody public ResponseEntity<MyExtensionMessage> call (
+	@ResponseBody public ResponseEntity<MyExtensionMessage> Call (
 			@RequestBody Map<String,Object> map,
 			HttpSession session)	{
 
@@ -90,24 +79,25 @@ public class CekController {
 
 		MyExtensionMessage result = null;
 		// custom Intent
-		if (intentName.equals("call")) { 
+		if (intentName.equals("Call")) { 
 			if (slots != null) { 
 				// 인터렉션 모델에서의 슬롯 이름과 같아야 한다.
 				String msg = "";
 				Map<String, Object> placesMap = null;
 				Map<String, Object> namesMap = null;
 
-
+				//현재 받은 SLOT값들을 전달하면서 재호출
 				if(!slots.containsKey("PLACE")) {
 					msg ="방송할 위치를 알려주세요.";
 					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
+					
+					result= new MyExtensionMessage("Call", msg, true, "PlainText",namesMap);
 					//현재 받은 SLOT값들을 전달하면서 재호출
-					result= new MyExtensionMessage("call", msg, true, "PlainText",namesMap);
 				}else if(!slots.containsKey("NUMBER")) {					
 					msg ="수리완료된 차량번호를 알려주세요.";
 					placesMap = (HashMap<String, Object>) slots.get("PLACE");
-					//현재 받은 SLOT값들을 전달하면서 재호출
-					result= new MyExtensionMessage("call", msg, true, "PlainText",placesMap);
+					
+					result= new MyExtensionMessage("Call", msg, true, "PlainText",placesMap);
 				}else {
 
 					
@@ -121,8 +111,9 @@ public class CekController {
 					
 					//인식된 SLOT으로부터 값 추출
 					msg = numberValue +"번 차량 수리 완료되었습니다.";
-					result= new MyExtensionMessage("call", msg, true, "PlainText");
+					result= new MyExtensionMessage("Call", msg, true, "PlainText");
 					ttsService.downloadMP3(msg,session, placesValue);
+					return result;
 				}					
 			} 		
 			// 다시 물을때   
@@ -130,29 +121,35 @@ public class CekController {
 			if (slots != null) { 
 				// 인터렉션 모델에서의 슬롯 이름과 같아야 한다.
 				String msg = "";
+				Map<String, Object> placesMap = null;
+				Map<String, Object> namesMap = null;
 
 				if(!slots.containsKey("PLACE")) {
-					msg ="";
-					result= new MyExtensionMessage("call", msg, true, "PlainText");
+					msg ="방송할 위치를 알려주세요.";
+					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
+					//현재 받은 SLOT값들을 전달하면서 재호출
+					result= new MyExtensionMessage("Call", msg, true, "PlainText",namesMap);
 				}else if(!slots.containsKey("NUMBER")) {
-					result= new MyExtensionMessage("call", msg, true, "PlainText");
+					msg ="수리완료된 차량번호를 알려주세요.";
+					placesMap = (HashMap<String, Object>) slots.get("PLACE");
+					//현재 받은 SLOT값들을 전달하면서 재호출
+					result= new MyExtensionMessage("Call", msg, true, "PlainText",placesMap);
 				}else {
-					Map<String, Object> placesMap = null;
-					Map<String, Object> namesMap = null;
-					
+				
 					placesMap = (HashMap<String, Object>) slots.get("PLACE");				
 					placesName = (String) placesMap.get("name"); 
 					placesValue = (String) placesMap.get("value");
 					
-										
 					namesMap = (HashMap<String, Object>) slots.get("NUMBER");
 					numberName = (String) namesMap.get("name");
 					numberValue = (String) namesMap.get("value");
 					
 					//인식된 SLOT으로부터 값 추출
 					msg = numberValue +"번 차량 수리 완료되었습니다.";
-					result= new MyExtensionMessage("call", msg, true, "PlainText");
+					result= new MyExtensionMessage("Call", msg, true, "PlainText");
 					ttsService.downloadMP3(msg,session, placesValue);
+					
+					return result;
 				}					
 			}
 		} 
