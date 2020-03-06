@@ -253,6 +253,7 @@
 
 
 
+
 		<!-- AWS transcribe, polly <dependency> <groupId>software.amazon.awssdk</groupId> 
 			<artifactId>transcribe</artifactId> </dependency> <dependency> <groupId>software.amazon.awssdk</groupId> 
 			<artifactId>transcribestreaming</artifactId> </dependency> <dependency> <groupId>software.amazon.awssdk</groupId> 
