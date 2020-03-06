@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.poseungcar.broadcastspeaker.service.IPlaceHan2EnService;
+import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
 
 
 
@@ -22,7 +22,7 @@ import com.poseungcar.broadcastspeaker.service.IPlaceHan2EnService;
 public class HomeController {
 	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 @Autowired
-IPlaceHan2EnService placeHan2EnService;
+ICallsVoMapService callsVoMapService;
 	
 
 	@RequestMapping(value = "/ip", method= RequestMethod.POST, produces = "application/json" )

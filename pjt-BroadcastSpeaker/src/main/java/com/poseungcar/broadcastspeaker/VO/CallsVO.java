@@ -1,6 +1,8 @@
 package com.poseungcar.broadcastspeaker.VO;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 public class CallsVO {
@@ -12,91 +14,126 @@ public class CallsVO {
 		this.userId = userId;
 	}
 	//고객 대기실
-	Queue<String> CustomerWaitingRoom= new LinkedList<>();
-	public void offerCustomerWaitingRoom(String value) {
+	Queue<Map<String, String>> CustomerWaitingRoom= new LinkedList<Map<String, String>>();
+	public void offerCustomerWaitingRoom(String number, String fileName) {
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("number", number);
+		value.put("fileName", fileName);
 		CustomerWaitingRoom.offer(value);
 	}
-	public String pollCustomerWaitingRoom() {
+	public Map<String, String> pollCustomerWaitingRoom() {
 		return CustomerWaitingRoom.poll();
 	}
 	public boolean isEmptyCustomerWaitingRoom() {
 		return CustomerWaitingRoom.isEmpty();
 	}
 	//프론트
-	Queue<String> front = new LinkedList<>();
-	public void offerfront(String value) {
+	Queue<Map<String, String>> front = new LinkedList<Map<String, String>>();
+	public void offerFront(String number, String fileName) {
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("number", number);
+		value.put("fileName", fileName);
 		front.offer(value);
 	}
-	public String pollfront() {
+	public Map<String, String> pollFront() {
 		return front.poll();
 	}
-	public boolean isEmptyfront() {
+	public boolean isEmptyFront() {
 		return front.isEmpty();
 	}
 	//사무실
-	Queue<String> office = new LinkedList<>();
-	public void offeroffice(String value) {
+	Queue<Map<String, String>> office = new LinkedList<Map<String, String>>();
+	public void offerOffice(String number, String fileName) {
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("number", number);
+		value.put("fileName", fileName);
 		office.offer(value);
 	}
-	public String polloffice() {
+	public Map<String, String> pollOffice() {
 		return office.poll();
 	}
-	public boolean isEmptyoffice() {
+	public boolean isEmptyOffice() {
 		return office.isEmpty();
 	}
 	//휴게실
-	Queue<String> restArea = new LinkedList<>();
-	public void offerrestArea(String value) {
+	Queue<Map<String, String>> restArea = new LinkedList<Map<String, String>>();
+	public void offerRestArea(String number, String fileName) {
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("number", number);
+		value.put("fileName", fileName);
 		restArea.offer(value);
 	}
-	public String pollrestArea() {
+	public Map<String, String> pollRestArea() {
 		return restArea.poll();
 	}
-	public boolean isEmptyrestArea() {
+	public boolean isEmptyRestArea() {
 		return restArea.isEmpty();
 	}
 	//정비실
-	Queue<String> maintenanceRoom = new LinkedList<>();
-	public void offermaintenanceRoom(String value) {
+	Queue<Map<String, String>> maintenanceRoom = new LinkedList<Map<String, String>>();
+	public void offerMaintenanceRoom(String number, String fileName) {
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("number", number);
+		value.put("fileName", fileName);
 		maintenanceRoom.offer(value);
 	}
-	public String pollmaintenanceRoom() {
+	public Map<String, String> pollMaintenanceRoom() {
 		return maintenanceRoom.poll();
 	}
-	public boolean isEmptymaintenanceRoom() {
+	public boolean isEmptyMaintenanceRoom() {
 		return maintenanceRoom.isEmpty();
 	}
 	//사장실
-	Queue<String> presidentOffice = new LinkedList<>();
-	public void offerpresidentOffice(String value) {
+	Queue<Map<String, String>> presidentOffice = new LinkedList<Map<String, String>>();
+	public void offerPresidentOffice(String number, String fileName) {
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("number", number);
+		value.put("fileName", fileName);
 		presidentOffice.offer(value);
 	}
-	public String pollpresidentOffice() {
+	public Map<String, String> pollPresidentOffice() {
 		return presidentOffice.poll();
 	}
-	public boolean isEmptypresidentOffice() {
+	public boolean isEmptyPresidentOffice() {
 		return presidentOffice.isEmpty();
 	}
 	//창구
-	Queue<String> window = new LinkedList<>();
-	public void offerwindow(String value) {
+	Queue<Map<String, String>> window = new LinkedList<Map<String, String>>();
+	public void offerWindow(String number, String fileName) {
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("number", number);
+		value.put("fileName", fileName);
 		window.offer(value);
 	}
-	public String pollwindow() {
+	public Map<String, String> pollWindow() {
 		return window.poll();
 	}
-	public boolean isEmptywindow() {
+	public boolean isEmptyWindow() {
 		return window.isEmpty();
 	}
-
-
-
+	
+	//직원 휴게실
+	Queue<Map<String, String>> seniorCommonRoom = new LinkedList<Map<String, String>>();
+	public void offerSeniorCommonRoom(String number, String fileName) {
+		Map<String, String> value = new HashMap<String, String>();
+		value.put("number", number);
+		value.put("fileName", fileName);
+		window.offer(value);
+	}
+	public Map<String, String> pollSeniorCommonRoom() {
+		return window.poll();
+	}
+	public boolean isEmptySeniorCommonRoom() {
+		return window.isEmpty();
+	}
+	
+	@Override
 	public String toString() {
 		return "CallsVO [userId=" + userId + ", CustomerWaitingRoom=" + CustomerWaitingRoom + ", front=" + front
 				+ ", office=" + office + ", restArea=" + restArea + ", maintenanceRoom=" + maintenanceRoom
-				+ ", presidentOffice=" + presidentOffice + ", window=" + window + "]";
-	}
-	
-	
+				+ ", presidentOffice=" + presidentOffice + ", window=" + window + ", seniorCommonRoom="
+				+ seniorCommonRoom + "]";
+	}	
 	
 }
+

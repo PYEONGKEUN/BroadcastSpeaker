@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.poseungcar.broadcastspeaker.VO.CallsVO;
 import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage;
-import com.poseungcar.broadcastspeaker.service.IPlaceHan2EnService;
+import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
+import com.poseungcar.broadcastspeaker.status.CallsVoMap;
 
 
 
@@ -34,7 +35,7 @@ public class CekController {
 
 
 	@Autowired
-	IPlaceHan2EnService placeHan2EnService;
+	ICallsVoMapService callsVoMapService;
 
 
 	@Autowired
@@ -42,12 +43,13 @@ public class CekController {
 
 	/**
 	 * Simply selects the home view to render by returning its name.
+	 *  
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/cek", method= RequestMethod.POST, produces = "application/json" )
 	@ResponseBody public ResponseEntity<MyExtensionMessage> Call (
 			@RequestBody Map<String,Object> map,
-			HttpSession session)	{
+			HttpSession session) throws Exception	{
 
 		Map<String, Object> m = (HashMap<String, Object>)map.get("request"); 
 		String type = (String) m.get("type");
@@ -67,7 +69,7 @@ public class CekController {
 		return new ResponseEntity<MyExtensionMessage>(mm, HttpStatus.OK);
 	}
 
-	public MyExtensionMessage IntentRequest(Map<String,Object> map, HttpSession session) {
+	public MyExtensionMessage IntentRequest(Map<String,Object> map, HttpSession session) throws Exception {
 		// extension의 인텐트 시작
 		Map<String, Object> intent = (HashMap<String, Object>) map.get("intent"); 
 		String intentName = (String) intent.get("name");
@@ -117,8 +119,9 @@ public class CekController {
 					//인식된 SLOT으로부터 값 추출
 					msg = numberValue +"번 차량 수리 완료되었습니다.";
 					result= new MyExtensionMessage("Call", msg, true, "PlainText");
-					ttsService.downloadMP3(msg,session, placesValue);
-					
+					String fileName = ttsService.downloadMP3(msg,session, placesValue);
+					// 테스트용 아이디
+					callsVoMapService.offer("skvudrms54", placesValue, numberValue,fileName);
 					return result;
 				}					
 			} 		
@@ -161,7 +164,10 @@ public class CekController {
 					//인식된 SLOT으로부터 값 추출
 					msg = numberValue +"번 차량 수리 완료되었습니다.";
 					result= new MyExtensionMessage("Call", msg, true, "PlainText");
-					ttsService.downloadMP3(msg,session, placesValue);
+					String fileName = ttsService.downloadMP3(msg,session, placesValue);
+				
+					// 테스트용 아이디
+					callsVoMapService.offer("skvudrms54", placesValue, numberValue,fileName);
 					
 					return result;
 				}					

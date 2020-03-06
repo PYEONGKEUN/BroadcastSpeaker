@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage3.MyResponse;
-
 public class MyExtensionMessage {
 	public String version = "1.0";
 	public Map<String,Object> sessionAttributes = new HashMap<String,Object>();

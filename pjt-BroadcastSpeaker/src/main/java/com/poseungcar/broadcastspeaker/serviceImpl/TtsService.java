@@ -10,37 +10,32 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.poseungcar.broadcastspeaker.DTO.Member;
-import com.poseungcar.broadcastspeaker.VO.CallsVO;
-import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage3;
-import com.poseungcar.broadcastspeaker.service.IPlaceHan2EnService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
-import com.poseungcar.broadcastspeaker.status.CallsVoMap;
 import com.poseungcar.broadcastspeaker.util.TimeLib;
 
 
 /*
  * tts 관련 처리
  */
+
 @Service
+@PropertySource({"classpath:profiles/${spring.profiles.active}/application.properties"})
 public class TtsService implements ITtsService{
 	
+	@Value("${uploads.location}")
+	private String uploadsLocation;
+	@Value("${uploads.uri_path}")
+	private String uploadsUriPath;
 
-	//callsVO 큐에 파일이름(경로 X)을 추가하고 TTS를 다운 로드
+	//callsVO 큐에 파일이름(경로 X)을 추가하고 TTS를 다운 로드 
 	public String downloadMP3(String msg, HttpSession session, String han) {
 		String clientId = "quktzpx0ng";//애플리케이션 클라이언트 아이디값";
 		String result = "";
@@ -67,20 +62,13 @@ public class TtsService implements ITtsService{
 				int read = 0;
 				byte[] bytes = new byte[1024];
 				// 시간으로 이름 생성
-				String tempname = TimeLib.getCurrDateTime();
-				//큐에 저장
-				//queue.offer(tempname);
-
-				// 세션에서 현재 로그인중인 아이디의 정보를 가져온다.
-				// 공통 공유 자원 CallsVoMap.userCallsVos 에서 해당 계정의 CallsVO 객체를 가져온다
-				//CallsVO에서 큐 객체를 가지고 처리한다.
-//				Member member = (Member)session.getAttribute("memberInfo");
-//				CallsVO callsVO =CallsVoMap.userCallsVos.get(member.getMem_id());
-//				placeHan2EnService.offer(callsVO, han, tempname);	                
-
-
-				File f = new File("/opt/clovatest/"+tempname + ".mp3");
-				result  = tempname;
+				String fileName = TimeLib.getCurrDateTimeName();
+				result = fileName;
+				String filePath = uploadsLocation+fileName + ".mp3";
+				
+				
+				File f = new File(filePath);
+				
 				f.createNewFile();
 				OutputStream outputStream = new FileOutputStream(f);
 				while ((read =is.read(bytes)) != -1) {

@@ -21,6 +21,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 		return new Class[] {ServletConfig.class};
 	}
 
+
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
