@@ -2,14 +2,19 @@ package com.poseungcar.broadcastspeaker.serviceImpl;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.poseungcar.broadcastspeaker.VO.CallsVO;
+import com.poseungcar.broadcastspeaker.controller.CekController;
 import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
 import com.poseungcar.broadcastspeaker.status.CallsVoMap;
 @Service
 public class CallsVoMapService implements ICallsVoMapService{
 
+	private static final Logger logger = LoggerFactory.getLogger(CallsVoMapService.class);
+	
 	final private String[] PLACES = 
 		{"전체","고객대기실","프론트","사무실","휴게실","정비실","사장실","창구","직원휴게실"};
 	Map<String, CallsVO> callsVoMap = CallsVoMap.userCallsVos;
@@ -66,7 +71,7 @@ public class CallsVoMapService implements ICallsVoMapService{
 			callsVo.offerSeniorCommonRoom(number,fileName);
 		}
 
-
+		logger.info(callsVoMap.toString());
 
 	}
 
@@ -98,6 +103,7 @@ public class CallsVoMapService implements ICallsVoMapService{
 			//직원휴게실
 			result = callsVo.pollSeniorCommonRoom();
 		}
+		logger.info(result.toString());
 		return result;
 	}
 
@@ -128,8 +134,10 @@ public class CallsVoMapService implements ICallsVoMapService{
 			result = callsVo.isEmptyWindow();
 		}else if(place.equals(PLACES[8])) {
 			//직원휴게실
-			callsVo.isEmptySeniorCommonRoom();
+			result = callsVo.isEmptySeniorCommonRoom();
 		}
+		
+		
 		return result;
 	}
 

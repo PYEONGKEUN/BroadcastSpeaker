@@ -13,6 +13,8 @@ import java.net.URLEncoder;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -30,13 +32,15 @@ import com.poseungcar.broadcastspeaker.util.TimeLib;
 @PropertySource({"classpath:profiles/${spring.profiles.active}/application.properties"})
 public class TtsService implements ITtsService{
 	
-	@Value("${uploads.location}")
-	private String uploadsLocation;
-	@Value("${uploads.uri_path}")
-	private String uploadsUriPath;
+	private static final Logger logger = LoggerFactory.getLogger(TtsService.class);
+	
+	@Value("${tts.location}")
+	private String ttsLocation;
+	@Value("${tts.uri_path}")
+	private String ttsUriPath;
 
 	//callsVO 큐에 파일이름(경로 X)을 추가하고 TTS를 다운 로드 
-	public String downloadMP3(String msg, HttpSession session, String han) {
+	public String downloadMP3(String msg, String id) {
 		String clientId = "quktzpx0ng";//애플리케이션 클라이언트 아이디값";
 		String result = "";
 		String clientSecret = "JYlINeOp2s6fNfvxNCLE1IIihw4yyYcXXCxnEltX";//애플리케이션 클라이언트 시크릿값";
@@ -63,11 +67,25 @@ public class TtsService implements ITtsService{
 				byte[] bytes = new byte[1024];
 				// 시간으로 이름 생성
 				String fileName = TimeLib.getCurrDateTimeName();
-				result = fileName;
-				String filePath = uploadsLocation+"/"+fileName + ".mp3";
+				result = "/"+id+"/"+fileName;				
+				String filePath = ttsLocation+"/"+id;
 				
+				File dir = new File(filePath);
 				
-				File f = new File(filePath);
+				if(!dir.exists()) {
+					logger.info("dir path : " + dir.getPath());
+					if(!dir.mkdirs()) {
+						logger.info("폴더생성 성공");
+					}else {
+						logger.info("폴더생성 성공");
+					}
+					
+				}
+				
+				File f = new File(filePath,fileName+".mp3");
+
+				logger.info(" path : " + f.getPath());
+				
 				
 				f.createNewFile();
 				OutputStream outputStream = new FileOutputStream(f);
@@ -86,7 +104,7 @@ public class TtsService implements ITtsService{
 				System.out.println(response.toString());
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return result;
 	}
