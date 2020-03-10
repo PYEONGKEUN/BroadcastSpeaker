@@ -101,8 +101,9 @@ public class LoginController {
             result.put("login", false);
 		}		
 
-
+		logger.info(result.toString());
 		return result;
+		
 		
 	}
 	
