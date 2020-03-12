@@ -8,6 +8,7 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,20 +23,29 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @ComponentScan(basePackages = { "com.poseungcar.broadcastspeaker.service" })
 @ComponentScan(basePackages = {"com.poseungcar.broadcastspeaker.serviceImpl"})
-@MapperScan(basePackages = { "com.poseungcar.broadcastspeaker.DAO" })
+@MapperScan(basePackages = { "com.poseungcar.broadcastspeaker.DAO" , "mapper"})
 
+@PropertySource({"classpath:profiles/${spring.profiles.active}/application.properties"})
 
 @EnableScheduling
 @EnableTransactionManagement
 public class RootConfig {
 	
+	@Value("${db.url}")
+	private String dbURL;
+	@Value("${db.userName}")
+	private String dbUserName;
+	@Value("${db.password}")
+	private String dbPassword;
+	
+	
 	@Bean
 	public DataSource dataSource() {
 		DataSource ds=new DataSource();
-		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://itbuddy.iptime.org:8233/codehouse"); 
-		ds.setUsername("yuhan"); 
-		ds.setPassword("yuhan1234"); 
+		ds.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+		ds.setUrl(dbURL); 
+		ds.setUsername(dbUserName); 
+		ds.setPassword(dbPassword); 
 		ds.setInitialSize(2);
 		ds.setMaxActive(10);
 		ds.setMaxIdle(10);
