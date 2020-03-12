@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poseungcar.broadcastspeaker.DAO.IGroupDAO">
+
+    <select id="select" resultType="com.poseungcar.broadcastspeaker.DTO.Group">
+        SELECT *
+        FROM seoyeon.Group
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="grpNo != null">AND grpNo=#{grpNo}</if>
+            <if test="grpName != null">AND grpName=#{grpName}</if>
+        </trim>
+
+    </select>
+
+    <update id="update" parameterType="com.poseungcar.broadcastspeaker.DTO.Group" >
+        UPDATE seoyeon.Group
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="grpName != null">grpName=#{grpName},</if>
+        </trim>
+        WHERE grpNo=#{grpNo}
+    </update>
+
+    <insert id="insert" parameterType="com.poseungcar.broadcastspeaker.DTO.Group"  useGeneratedKeys="true" keyProperty="grpNo" keyColumn="grpNo"> 
+        INSERT INTO seoyeon.Group(grpNo, grpName)
+        values(#{grpNo},#{grpName})
+    </insert>
+
+</mapper>

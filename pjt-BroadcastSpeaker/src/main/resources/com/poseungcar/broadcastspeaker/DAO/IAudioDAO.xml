@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poseungcar.broadcastspeaker.DAO.IAudioDAO">
+
+    <select id="select" resultType="com.poseungcar.broadcastspeaker.DTO.Audio">
+        SELECT *
+        FROM Audio
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="audNo != null">AND audNo=#{audNo}</if>
+            <if test="grpNo != null">AND grpNo=#{grpNo}</if>
+            <if test="audName != null">AND audName=#{audName}</if>
+            <if test="audDatetime != null">AND audDatetime=#{audDatetime}</if>
+            <if test="audTgtName != null">AND audTgtName=#{audTgtName}</if>
+            <if test="audMsg != null">AND audMsg=#{audMsg}</if>
+        </trim>
+
+    </select>
+
+    <update id="update" parameterType="com.poseungcar.broadcastspeaker.DTO.Audio" >
+        UPDATE Audio
+        <trim prefix="SET" suffixOverrides="," >
+            <if test="grpNo != null">grpNo=#{grpNo},</if>
+            <if test="audName != null">audName=#{audName},</if>
+            <if test="audDatetime != null">audDatetime=#{audDatetime},</if>
+            <if test="audTgtName != null">audTgtName=#{audTgtName},</if>
+            <if test="audMsg != null">audMsg=#{audMsg},</if>
+        </trim>
+        WHERE audNo=#{audNo}
+    </update>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="audNo" keyColumn="audNo"> 
+        INSERT INTO Audio(grpNo, audName, audDatetime, audTgtName, audMsg)
+        values(#{grpNo},#{audName},#{audDatetime},#{audTgtName},#{audMsg})
+    </insert>
+
+</mapper>

@@ -4,30 +4,31 @@
 
     <select id="select" resultType="com.poseungcar.broadcastspeaker.DTO.Member">
         SELECT *
-        FROM member
+        FROM Member
         <trim prefix="WHERE" prefixOverrides="AND|OR">
-            <if test="mem_id != null">AND mem_id=#{mem_id}</if>
-            <if test="mem_nickname != null">AND mem_nickname=#{mem_nickname}</if>
-            <if test="mem_pw != null">AND mem_pw=#{mem_pw}</if>
-            <if test="mem_email != null">AND mem_email=#{mem_email}</if>
+            <if test="memId != null">AND memId=#{memId}</if>
+            <if test="memEmail != null">AND memEmail=#{memEmail}</if>
+            <if test="grpNo != null">AND grpNo=#{grpNo}</if>
+            <if test="memPassword != null">AND memPassword=#{memPassword}</if>
+            <if test="memName != null">AND memName=#{memName}</if>
         </trim>
 
     </select>
 
     <update id="update" parameterType="com.poseungcar.broadcastspeaker.DTO.Member" >
-        UPDATE member
+        UPDATE Member
         <trim prefix="SET" suffixOverrides=",">
-            <if test="mem_nickname != null">mem_nickname=#{mem_nickname},</if>
-            <if test="mem_pw != null">mem_pw=#{mem_pw},</if>
-            <if test="mem_email != null">mem_email=#{mem_email},</if>
-            <if test="mem_img != null">mem_img=#{mem_img},</if>
+            <if test="memEmail != null">memEmail=#{memEmail},</if>
+            <if test="grpNo != null">grpNo=#{grpNo},</if>
+            <if test="memPassword != null">memPassword=#{memPassword},</if>
+            <if test="memName != null">memName=#{memName},</if>
         </trim>
-        WHERE mem_id=#{mem_id}
+        WHERE memId=#{memId}
     </update>
 
     <insert id="insert" parameterType="com.poseungcar.broadcastspeaker.DTO.Member" > 
-        INSERT INTO member(mem_id,mem_nickname,mem_pw,mem_email,mem_img)
-        values(#{mem_id},#{mem_nickname},#{mem_pw},#{mem_email},#{mem_img})
+        INSERT INTO Member(memId, memEmail, grpNo, memPassword, memName)
+        values(#{memId},#{memEmail},#{grpNo},#{memPassword},#{memName})
     </insert>
 
 </mapper>

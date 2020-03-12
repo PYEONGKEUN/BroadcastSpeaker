@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poseungcar.broadcastspeaker.DAO.IGroupMemberDAO">
+
+    <select id="select" resultType="com.poseungcar.broadcastspeaker.DTO.GroupMember">
+        SELECT *
+        FROM GroupMember
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="grpMemNo != null">AND grpMemNo=#{grpMemNo}</if>
+            <if test="grpNo != null">AND grpNo=#{grpNo}</if>
+            <if test="grpMemName != null">AND grpMemName=#{grpMemName}</if>
+        </trim>
+
+    </select>
+
+    <update id="update" parameterType="com.poseungcar.broadcastspeaker.DTO.GroupMember" >
+        UPDATE GroupMember
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="grpNo != null">grpNo=#{grpNo},</if>
+            <if test="grpMemName != null">grpMemName=#{grpMemName},</if>
+        </trim>
+        WHERE grpNo=#{grpNo}
+    </update>
+
+    <insert id="insert" parameterType="com.poseungcar.broadcastspeaker.DTO.GroupMember"  useGeneratedKeys="true" keyProperty="cmt_no" keyColumn="cmt_no"> 
+        INSERT INTO GroupMember(grpNo, grpMemName)
+        values(#{grpNo},#{grpMemName})
+    </insert>
+
+</mapper>
