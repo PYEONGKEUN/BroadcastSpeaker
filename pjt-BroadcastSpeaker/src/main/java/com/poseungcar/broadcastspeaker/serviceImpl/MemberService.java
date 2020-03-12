@@ -40,27 +40,27 @@ public class MemberService implements IMemberService{
         //member.setMem_pw(passwordEncoder.encode(member.getMem_pw()));
 
 
-		if(member.getMem_id() == null || member.getMem_pw() == null){
+		if(member.getMemId() == null || member.getMemPassword() == null){
 
 		}else{
 
 			List<Member> output =  memberDAO.select(member);
 			// 아이디와 비밀번호를 
 			if(output.size() > 0){
-				logger.info(member.getMem_id() +" logged in");
+				logger.info(member.getMemId() +" logged in");
 				session.setAttribute("memberInfo", output.get(0));
 				session.setAttribute("status", "login");
 				// 공통 변수에 추가 현재 로그인 사용자의 CallsVO가 없을경우 하나 생성
-				if(!CallsVoMap.userCallsVos.containsKey(output.get(0).getMem_id())) {
+				if(!CallsVoMap.userCallsVos.containsKey(output.get(0).getMemId())) {
 					CallsVO callsVO = new CallsVO();
-					callsVO.setUserId(output.get(0).getMem_id());
-					CallsVoMap.userCallsVos.put(output.get(0).getMem_id(), callsVO);
+					callsVO.setUserId(output.get(0).getMemId());
+					CallsVoMap.userCallsVos.put(output.get(0).getMemId(), callsVO);
 				}						
 
 				
 				result = true;
 			}else {
-				logger.info(member.getMem_id() +"Password or Id is not correct");
+				logger.info(member.getMemId() +"Password or Id is not correct");
 			}
 
 		}
@@ -122,19 +122,19 @@ public class MemberService implements IMemberService{
 				boolean result = false;
 
 
-				if(member.getMem_id() == null || member.getMem_pw() == null){
+				if(member.getMemId() == null || member.getMemPassword() == null){
 
 				}else{
 
 					List<Member> output =  memberDAO.select(member);
 					// 아이디와 비밀번호를 
 					if(output.size() > 0){
-						logger.info(member.getMem_id() +" logged in");
+						logger.info(member.getMemId() +" logged in");
 						
-						cookie.setValue(member.getMem_id());					
+						cookie.setValue(member.getMemId());					
 						result = true;
 					}else {
-						logger.info(member.getMem_id() +"Password or Id is not correct");
+						logger.info(member.getMemId() +"Password or Id is not correct");
 					}
 
 				}

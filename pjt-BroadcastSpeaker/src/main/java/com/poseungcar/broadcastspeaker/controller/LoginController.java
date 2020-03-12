@@ -57,8 +57,8 @@ public class LoginController {
 		
 		Member member = new Member();
 		
-		member.setMem_id(id);
-		member.setMem_pw(pw);				
+		member.setMemId(id);
+		member.setMemPassword(pw);				
 
 		if(memberService.login(member, session)) {
 			return "login-result";
@@ -70,15 +70,15 @@ public class LoginController {
 	//안드로이드에서 사용할 로그인 
 	
 	@ResponseBody
-	@PostMapping(value = "/loginaction", consumes = "application/json", produces = "application/json")
-	public Map<String, Boolean> loginAndAction(   
+	@PostMapping(value = "/login.json", consumes = "application/json", produces = "application/json")
+	public Map<String, String> loginAndAction(   
 			HttpServletRequest request, 
 			HttpSession session, 
 			@CookieValue(value="storeIdCookie", required = false) Cookie cookie,
 			@RequestBody Map<String, Object> map) {
 		
 
-		Map<String, Boolean> result = new HashMap<String, Boolean>();
+		Map<String, String> result = new HashMap<String, String>();
 		
 		logger.info("Do Login");
 //		String id = request.getParameter("id");
@@ -89,16 +89,16 @@ public class LoginController {
 		
 		Member member = new Member();
 		
-		member.setMem_id(id);
-		member.setMem_pw(pw);
+		member.setMemId(id);
+		member.setMemPassword(pw);
 		
 		
 		if(memberService.login(member, session)) {
             session.setAttribute("memberInfo", member);
-            result.put("login", true);
+            result.put("status", "complete");
 		}else {
             session.invalidate(); //로그인 성공시에만 세션 아이디가 안드로이드로 넘어감.
-            result.put("login", false);
+            result.put("status", "fail");
 		}		
 
 		logger.info(result.toString());

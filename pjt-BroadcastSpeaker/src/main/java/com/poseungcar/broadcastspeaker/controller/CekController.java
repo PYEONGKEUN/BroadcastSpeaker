@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.poseungcar.broadcastspeaker.VO.MyExtensionMessage;
 import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
+import com.poseungcar.broadcastspeaker.service.IClientService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
 import com.poseungcar.broadcastspeaker.serviceImpl.CallsVoMapService;
 import com.poseungcar.broadcastspeaker.util.CekMsg;
@@ -42,6 +43,9 @@ public class CekController {
 
 	@Autowired
 	ITtsService ttsService;
+	
+	@Autowired
+	IClientService clientService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -124,11 +128,9 @@ public class CekController {
 					numberValue = (String) namesMap.get("value");
 
 					//인식된 SLOT으로부터 값 추출
-					msg = CekMsg.msg(numberValue);
+					msg = CekMsg.callCarNumber(numberValue);
 					result= new MyExtensionMessage("Call", msg, true, "PlainText");
-					String fileName = ttsService.downloadMP3(msg,id);
-					// 테스트용 아이디
-					callsVoMapService.offer("skvudrms54", placesValue, numberValue,fileName);
+					clientService.callCarNumber("skvudrms54", placesValue, numberValue);
 					logger.info("resut : "+result.toString());
 					return result;
 				}					
@@ -180,13 +182,13 @@ public class CekController {
 					numberValue = (String) namesMap.get("value");
 
 					//인식된 SLOT으로부터 값 추출
-					msg = CekMsg.msg(numberValue);
+					msg = CekMsg.callCarNumber(numberValue);
 					result= new MyExtensionMessage("Call", msg, true, "PlainText");
-					String fileName = ttsService.downloadMP3(msg,id);
 
-					// 테스트용 아이디
-					callsVoMapService.offer("skvudrms54", placesValue, numberValue,fileName);
-					logger.info("resut : "+result.toString());
+
+					// 테스트용 아이디					
+					clientService.callCarNumber("skvudrms54", placesValue, numberValue);
+					logger.info("result : "+result.toString());
 					return result;
 				}					
 			}
@@ -240,12 +242,14 @@ public class CekController {
 					numberValue = (String) recievedCekSessionAttributes.get("NUMBER");
 
 					//인식된 SLOT으로부터 값 추출
-					msg = CekMsg.msg(numberValue);
-					result= new MyExtensionMessage("Call", msg, true, "PlainText");
-					String fileName = ttsService.downloadMP3(msg,id);
-
-					// 테스트용 아이디
-					callsVoMapService.offer("skvudrms54", placesValue, numberValue,fileName);
+//					msg = CekMsg.callCarNumber(numberValue);
+//					result= new MyExtensionMessage("Call", msg, true, "PlainText");
+//					String fileName = ttsService.downloadMP3(msg,id);
+//
+//					// 테스트용 아이디
+//					callsVoMapService.offer("skvudrms54", placesValue, numberValue, "number",fileName);
+					
+					
 					logger.info("resut : "+result.toString());
 					return result;
 				}					

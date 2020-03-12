@@ -15,9 +15,9 @@ public class CallsVO {
 	}
 	//고객 대기실
 	Queue<Map<String, String>> CustomerWaitingRoom= new LinkedList<Map<String, String>>();
-	public void offerCustomerWaitingRoom(String number, String fileName) {
+	public void offerCustomerWaitingRoom(String msg, String type, String fileName) {
 		Map<String, String> value = new HashMap<String, String>();
-		value.put("number", number);
+		value.put("msg", msg);value.put("type", type);value.put("type", type);
 		value.put("fileName", fileName);
 		CustomerWaitingRoom.offer(value);
 	}
@@ -29,9 +29,9 @@ public class CallsVO {
 	}
 	//프론트
 	Queue<Map<String, String>> front = new LinkedList<Map<String, String>>();
-	public void offerFront(String number, String fileName) {
+	public void offerFront(String msg, String type, String fileName) {
 		Map<String, String> value = new HashMap<String, String>();
-		value.put("number", number);
+		value.put("msg", msg);value.put("type", type);
 		value.put("fileName", fileName);
 		front.offer(value);
 	}
@@ -43,9 +43,9 @@ public class CallsVO {
 	}
 	//사무실
 	Queue<Map<String, String>> office = new LinkedList<Map<String, String>>();
-	public void offerOffice(String number, String fileName) {
+	public void offerOffice(String msg, String type, String fileName) {
 		Map<String, String> value = new HashMap<String, String>();
-		value.put("number", number);
+		value.put("msg", msg);value.put("type", type);
 		value.put("fileName", fileName);
 		office.offer(value);
 	}
@@ -57,9 +57,9 @@ public class CallsVO {
 	}
 	//휴게실
 	Queue<Map<String, String>> restArea = new LinkedList<Map<String, String>>();
-	public void offerRestArea(String number, String fileName) {
+	public void offerRestArea(String msg, String type, String fileName) {
 		Map<String, String> value = new HashMap<String, String>();
-		value.put("number", number);
+		value.put("msg", msg);value.put("type", type);
 		value.put("fileName", fileName);
 		restArea.offer(value);
 	}
@@ -71,9 +71,9 @@ public class CallsVO {
 	}
 	//정비실
 	Queue<Map<String, String>> maintenanceRoom = new LinkedList<Map<String, String>>();
-	public void offerMaintenanceRoom(String number, String fileName) {
+	public void offerMaintenanceRoom(String msg, String type, String fileName) {
 		Map<String, String> value = new HashMap<String, String>();
-		value.put("number", number);
+		value.put("msg", msg);value.put("type", type);
 		value.put("fileName", fileName);
 		maintenanceRoom.offer(value);
 	}
@@ -85,9 +85,9 @@ public class CallsVO {
 	}
 	//사장실
 	Queue<Map<String, String>> presidentOffice = new LinkedList<Map<String, String>>();
-	public void offerPresidentOffice(String number, String fileName) {
+	public void offerPresidentOffice(String msg, String type, String fileName) {
 		Map<String, String> value = new HashMap<String, String>();
-		value.put("number", number);
+		value.put("msg", msg);value.put("type", type);
 		value.put("fileName", fileName);
 		presidentOffice.offer(value);
 	}
@@ -99,9 +99,9 @@ public class CallsVO {
 	}
 	//창구
 	Queue<Map<String, String>> window = new LinkedList<Map<String, String>>();
-	public void offerWindow(String number, String fileName) {
+	public void offerWindow(String msg, String type, String fileName) {
 		Map<String, String> value = new HashMap<String, String>();
-		value.put("number", number);
+		value.put("msg", msg);value.put("type", type);
 		value.put("fileName", fileName);
 		window.offer(value);
 	}
@@ -114,9 +114,9 @@ public class CallsVO {
 	
 	//직원 휴게실
 	Queue<Map<String, String>> seniorCommonRoom = new LinkedList<Map<String, String>>();
-	public void offerSeniorCommonRoom(String number, String fileName) {
+	public void offerSeniorCommonRoom(String msg, String type, String fileName) {
 		Map<String, String> value = new HashMap<String, String>();
-		value.put("number", number);
+		value.put("msg", msg);value.put("type", type);
 		value.put("fileName", fileName);
 		window.offer(value);
 	}

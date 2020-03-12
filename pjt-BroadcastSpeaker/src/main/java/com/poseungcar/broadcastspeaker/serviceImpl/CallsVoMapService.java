@@ -21,7 +21,7 @@ public class CallsVoMapService implements ICallsVoMapService{
 	// CallsVO를 쉽게 컨트롤 하기위한 메소드
 	// CallsVO 객체와 
 	@Override
-	public void offer(String id, String place, String number,String fileName) throws Exception{
+	public void offer(String id, String place, String msg, String type, String fileName) throws Exception{
 		// TODO Auto-generated method stub
 		// 없을경우 생성 해당 $id : new CallsVO 생성
 		if(!callsVoMap.containsKey(id)) {
@@ -31,44 +31,44 @@ public class CallsVoMapService implements ICallsVoMapService{
 		CallsVO callsVo = callsVoMap.get(id);
 		if(place.equals(PLACES[0])) {
 			//고객 대기실
-			callsVo.offerCustomerWaitingRoom(number,fileName);
+			callsVo.offerCustomerWaitingRoom(msg, type, fileName);
 			//프론트
-			callsVo.offerFront(number,fileName);
+			callsVo.offerFront(msg, type, fileName);
 			//사무실
-			callsVo.offerOffice(number,fileName);
+			callsVo.offerOffice(msg, type, fileName);
 			//휴게실
-			callsVo.offerRestArea(number,fileName);
+			callsVo.offerRestArea(msg, type, fileName);
 			//정비실
-			callsVo.offerMaintenanceRoom(number,fileName);
+			callsVo.offerMaintenanceRoom(msg, type, fileName);
 			//사장실
-			callsVo.offerPresidentOffice(number,fileName);
+			callsVo.offerPresidentOffice(msg, type, fileName);
 			//창구
-			callsVo.offerWindow(number,fileName);
+			callsVo.offerWindow(msg, type, fileName);
 
 		}else if(place.equals(PLACES[1])) {				
 			//고객 대기실
-			callsVo.offerCustomerWaitingRoom(number,fileName);
+			callsVo.offerCustomerWaitingRoom(msg, type, fileName);
 		}else if(place.equals(PLACES[2])) {
 			//프론트
-			callsVo.offerFront(number,fileName);
+			callsVo.offerFront(msg, type, fileName);
 		}else if(place.equals(PLACES[3])) {
 			//사무실
-			callsVo.offerOffice(number,fileName);
+			callsVo.offerOffice(msg, type, fileName);
 		}else if(place.equals(PLACES[4])) {
 			//휴게실
-			callsVo.offerRestArea(number,fileName);
+			callsVo.offerRestArea(msg, type, fileName);
 		}else if(place.equals(PLACES[5])) {
 			//정비실
-			callsVo.offerMaintenanceRoom(number,fileName);
+			callsVo.offerMaintenanceRoom(msg, type, fileName);
 		}else if(place.equals(PLACES[6])) {
 			//사장실
-			callsVo.offerPresidentOffice(number,fileName);
+			callsVo.offerPresidentOffice(msg, type, fileName);
 		}else if(place.equals(PLACES[7])) {
 			//창구
-			callsVo.offerWindow(number,fileName);
+			callsVo.offerWindow(msg, type, fileName);
 		}else if(place.equals(PLACES[8])) {
 			//직원휴게실
-			callsVo.offerSeniorCommonRoom(number,fileName);
+			callsVo.offerSeniorCommonRoom(msg, type, fileName);
 		}
 
 		logger.info(callsVoMap.toString());

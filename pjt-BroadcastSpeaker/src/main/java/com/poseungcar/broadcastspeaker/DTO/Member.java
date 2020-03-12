@@ -1,47 +1,46 @@
 package com.poseungcar.broadcastspeaker.DTO;
 
 public class Member {
-	
-	String mem_id;
-	String mem_pw;
-	String mem_nickname;
-	String mem_email;
-	String mem_img;
-	public String getMem_id() {
-		return mem_id;
+
+	String memId;
+	String memEmail;
+	Integer grpNo;
+	String memPassword;
+	String memName;
+	public String getMemId() {
+		return memId;
 	}
-	public void setMem_id(String mem_id) {
-		this.mem_id = mem_id;
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
-	public String getMem_pw() {
-		return mem_pw;
+	public String getMemEmail() {
+		return memEmail;
 	}
-	public void setMem_pw(String mem_pw) {
-		this.mem_pw = mem_pw;
+	public void setMemEmail(String memEmail) {
+		this.memEmail = memEmail;
 	}
-	public String getMem_nickname() {
-		return mem_nickname;
+	public Integer getGrpNo() {
+		return grpNo;
 	}
-	public void setMem_nickname(String mem_nickname) {
-		this.mem_nickname = mem_nickname;
+	public void setGrpNo(Integer grpNo) {
+		this.grpNo = grpNo;
 	}
-	public String getMem_email() {
-		return mem_email;
+	public String getMemPassword() {
+		return memPassword;
 	}
-	public void setMem_email(String mem_email) {
-		this.mem_email = mem_email;
+	public void setMemPassword(String memPassword) {
+		this.memPassword = memPassword;
 	}
-	public String getMem_img() {
-		return mem_img;
+	public String getMemName() {
+		return memName;
 	}
-	public void setMem_img(String mem_img) {
-		this.mem_img = mem_img;
+	public void setMemName(String memName) {
+		this.memName = memName;
 	}
 	@Override
 	public String toString() {
-		return "Member [mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_nickname=" + mem_nickname + ", mem_email="
-				+ mem_email + ", mem_img=" + mem_img + "]";
+		return "Member [memId=" + memId + ", memEmail=" + memEmail + ", grpNo=" + grpNo + ", memPassword=" + memPassword
+				+ ", memName=" + memName + "]";
 	}
-
-
+   
 }

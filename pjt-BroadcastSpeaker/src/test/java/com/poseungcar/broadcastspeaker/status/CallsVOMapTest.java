@@ -26,21 +26,21 @@ public class CallsVOMapTest {
 
 
 	
-	@Test
-	public void CallsVoMapTest() throws Exception{
-		CallsVO callsVO = new CallsVO();
-		
-		callsVoMapService.offer("skvudrms54", "전체", "1234","hello1");
-		callsVoMapService.offer("skvudrms54", "전체", "1235","hello2");
-		callsVoMapService.offer("skvudrms54", "전체", "1236","hello3");
-		callsVoMapService.offer("skvudrms54", "전체", "1237","hello4");
-		callsVoMapService.offer("skvudrms54", "전체", "1238","hello5");
-		callsVoMapService.offer("npk", "고객대기실", "1238","hello5");	
-		LOGGER.info(CallsVoMap.userCallsVos.toString());		
-		LOGGER.info(callsVoMapService.poll("skvudrms54", "고객대기실").toString());
-		LOGGER.info(CallsVoMap.userCallsVos.toString());
-	}
-	
+//	@Test
+//	public void CallsVoMapTest() throws Exception{
+//		CallsVO callsVO = new CallsVO();
+//		
+//		callsVoMapService.offer("skvudrms54", "전체", "1234","hello1");
+//		callsVoMapService.offer("skvudrms54", "전체", "1235","hello2");
+//		callsVoMapService.offer("skvudrms54", "전체", "1236","hello3");
+//		callsVoMapService.offer("skvudrms54", "전체", "1237","hello4");
+//		callsVoMapService.offer("skvudrms54", "전체", "1238","hello5");
+//		callsVoMapService.offer("npk", "고객대기실", "1238","hello5");	
+//		LOGGER.info(CallsVoMap.userCallsVos.toString());		
+//		LOGGER.info(callsVoMapService.poll("skvudrms54", "고객대기실").toString());
+//		LOGGER.info(CallsVoMap.userCallsVos.toString());
+//	}
+//	
 
 	
 	
