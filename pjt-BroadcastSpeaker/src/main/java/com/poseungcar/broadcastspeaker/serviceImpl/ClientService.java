@@ -2,6 +2,8 @@ package com.poseungcar.broadcastspeaker.serviceImpl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,12 @@ import com.poseungcar.broadcastspeaker.service.ITtsService;
 import com.poseungcar.broadcastspeaker.util.CekMsg;
 import com.poseungcar.broadcastspeaker.util.TimeLib;
 
+
 @Service
 public class ClientService implements IClientService{
 
+	private static final Logger logger = LoggerFactory.getLogger(ClientService.class);
+	
 	@Autowired
 	ICallsVoMapService callsVoMapService;
 
@@ -60,6 +65,7 @@ public class ClientService implements IClientService{
 			insertAudio.setAudTgtName(place);
 			
 			
+			
 			//insertAudio.setGrpNo(Integer); 하기위해 호원의 grpNo 가져와서 Audio에 데이터 삽입
 			Member findMember = new Member();
 			findMember.setMemId(id);
@@ -68,8 +74,9 @@ public class ClientService implements IClientService{
 			if(!findedMember.isEmpty()) {
 				insertAudio.setGrpNo(findedMember.get(0).getGrpNo());
 			}			
-			
-			
+				
+			audioDAO.insert(insertAudio);
+			logger.info(insertAudio.toString());
 			
 			callsVoMapService.offer(id, place, number,"number", fileName);
 		} catch (Exception e) {
@@ -118,8 +125,10 @@ public class ClientService implements IClientService{
 			
 			if(!findedMember.isEmpty()) {
 				insertAudio.setGrpNo(findedMember.get(0).getGrpNo());
-			}			
+			}		
 			
+			audioDAO.insert(insertAudio);
+			logger.info(insertAudio.toString());
 			
 			
 			callsVoMapService.offer(id, "전체", grpMemName, "grpMemName",fileName);
