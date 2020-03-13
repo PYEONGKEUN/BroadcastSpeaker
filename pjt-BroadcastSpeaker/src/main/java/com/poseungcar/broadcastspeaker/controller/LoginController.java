@@ -80,18 +80,19 @@ public class LoginController {
 
 		Map<String, String> result = new HashMap<String, String>();
 		
-		logger.info("Do Login");
+		logger.info("Do Login" + map.toString());
 //		String id = request.getParameter("id");
 //		String pw = request.getParameter("pw");
 		
 		String id = (String) map.get("id");
 		String pw = (String) map.get("pw");
 		
+		
 		Member member = new Member();
 		
 		member.setMemId(id);
 		member.setMemPassword(pw);
-		
+		logger.info("Do Login"+member.toString());
 		
 		if(memberService.login(member, session)) {
             session.setAttribute("memberInfo", member);
