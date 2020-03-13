@@ -14,6 +14,9 @@
 		</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
+		<skipTests>true</skipTests>
+		<!--<cobertura.skip>true</cobertura.skip> -->
+		<jacoco.skip>true</jacoco.skip>
 	</properties>
 	<dependencyManagement>
 		<!-- AWS transcribe , polly -->
@@ -375,6 +378,14 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+						<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M4</version>
+				<configuration>
+					<skipTests>${skipTests}</skipTests>
+				</configuration>
+			</plugin>
 
 
 			<!-- polly -->
@@ -392,6 +403,25 @@
 				<configuration>
 					<mainClass>com.amazonaws.demos.polly.PollyDemo</mainClass>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
