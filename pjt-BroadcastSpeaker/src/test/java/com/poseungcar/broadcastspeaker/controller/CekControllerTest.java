@@ -33,36 +33,36 @@ public class CekControllerTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CekControllerTest.class);
 
-	@InjectMocks
-	private CekController cekController;
-	private MockMvc MockMVC;
-	@Autowired
-	protected ResourceLoader resourceLoader;
-	
-	@Before
-	public void setup() {
-		MockMVC = MockMvcBuilders.standaloneSetup(cekController).build();
-	}
-	
-	
-
-//	@Test
-//	public void json_파일로테스트() throws Exception {
-//		//given
-//		final String requestBody = readJson("classpath:PLACE_NUMBER.json");
-//		LOGGER.info("requestBody : "+requestBody);
-//		//when
-//		final ResultActions resultActions = MockMVC.perform(post("/cek")
-//				.contentType(MediaType.APPLICATION_JSON_UTF8)
-//				.content(requestBody))
-//				.andDo(print());
-//		//then
-//		resultActions.andExpect(status().isOk());
+//	@InjectMocks
+//	private CekController cekController;
+//	private MockMvc MockMVC;
+//	@Autowired
+//	protected ResourceLoader resourceLoader;
+//	
+//	@Before
+//	public void setup() {
+//		MockMVC = MockMvcBuilders.standaloneSetup(cekController).build();
 //	}
-	protected String readJson(final String path) throws IOException {
-		final InputStream inputStream = resourceLoader.getResource(path).getInputStream();
-		return IOUtils.toString(inputStream, "UTF-8");
-	}
+//	
+//	
+//
+////	@Test
+////	public void json_파일로테스트() throws Exception {
+////		//given
+////		final String requestBody = readJson("classpath:PLACE_NUMBER.json");
+////		LOGGER.info("requestBody : "+requestBody);
+////		//when
+////		final ResultActions resultActions = MockMVC.perform(post("/cek")
+////				.contentType(MediaType.APPLICATION_JSON_UTF8)
+////				.content(requestBody))
+////				.andDo(print());
+////		//then
+////		resultActions.andExpect(status().isOk());
+////	}
+//	protected String readJson(final String path) throws IOException {
+//		final InputStream inputStream = resourceLoader.getResource(path).getInputStream();
+//		return IOUtils.toString(inputStream, "UTF-8");
+//	}
 
 
 }
