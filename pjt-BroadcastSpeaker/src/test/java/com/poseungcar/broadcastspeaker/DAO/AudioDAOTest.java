@@ -40,14 +40,14 @@ public class AudioDAOTest {
         
     }
 
-    @Test
-    public void updateTest(){
-        Audio input = new Audio();
-        input.setAudNo(1);
-        input.setAudName("test");
-        input.setGrpNo(1);
-        AudioDAO.update(input);
-    }
+//    @Test
+//    public void updateTest(){
+//        Audio input = new Audio();
+//        input.setAudNo(1);
+//        input.setAudName("test");
+//        input.setGrpNo(1);
+//        AudioDAO.update(input);
+//    }
 
 //    @Test
 //    public void insertTest(){

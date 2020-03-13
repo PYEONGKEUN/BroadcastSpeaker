@@ -40,13 +40,13 @@ public class GroupDAOTest {
 
     }
 
-    @Test
-    public void updateTest(){
-        Group input = new Group();
-        input.setGrpNo(1);
-        input.setGrpName("Test");
-        GroupDAO.update(input);
-    }
+//    @Test
+//    public void updateTest(){
+//        Group input = new Group();
+//        input.setGrpNo(1);
+//        input.setGrpName("Test");
+//        GroupDAO.update(input);
+//    }
 
 //    @Test
 //    public void insertTest(){

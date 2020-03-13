@@ -40,14 +40,14 @@ public class GroupMemberDAOTest {
 
     }
 
-    @Test
-    public void updateTest(){
-        GroupMember input = new GroupMember();
-        input.setGrpNo(1);
-        input.setGrpMemName("Test");
-        input.setGrpMemNo(1);
-        GroupMemberDAO.update(input);
-    }
+//    @Test
+//    public void updateTest(){
+//        GroupMember input = new GroupMember();
+//        input.setGrpNo(1);
+//        input.setGrpMemName("Test");
+//        input.setGrpMemNo(1);
+//        GroupMemberDAO.update(input);
+//    }
 
 //    @Test
 //    public void insertTest(){

@@ -43,14 +43,14 @@ public class MemberDAOTest {
 
     }
 
-    @Test
-    public void updateTest(){
-        Member input = new Member();
-        input.setMemId("billip");
-        input.setMemPassword("1234");
-        input.setMemName("빌리빌리퐁");
-        MemberDAO.update(input);
-    }
+//    @Test
+//    public void updateTest(){
+//        Member input = new Member();
+//        input.setMemId("billip");
+//        input.setMemPassword("1234");
+//        input.setMemName("빌리빌리퐁");
+//        MemberDAO.update(input);
+//    }
 
 //    @Test
 //    public void insertTest(){
