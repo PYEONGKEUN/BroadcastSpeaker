@@ -70,7 +70,7 @@ public class LoginController {
 	//안드로이드에서 사용할 로그인 
 	
 	@ResponseBody
-	@PostMapping(value = "/login.json", consumes = "application/json", produces = "application/json")
+	@PostMapping(value = "/loginjson", consumes = "application/json", produces = "application/json")
 	public Map<String, String> loginAndAction(   
 			HttpServletRequest request, 
 			HttpSession session, 
