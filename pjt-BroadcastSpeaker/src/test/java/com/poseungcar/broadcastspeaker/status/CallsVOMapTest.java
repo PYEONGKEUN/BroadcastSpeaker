@@ -21,8 +21,8 @@ public class CallsVOMapTest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CallsVOMapTest.class);
 	
 
-	@Autowired
-	ICallsVoMapService callsVoMapService;
+//	@Autowired
+//	ICallsVoMapService callsVoMapService;
 
 
 	

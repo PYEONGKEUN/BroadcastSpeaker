@@ -105,6 +105,8 @@ public class TtsService implements ITtsService{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info(e.getMessage());
+			logger.info(e.getCause().toString());
 		}
 		return result;
 	}
