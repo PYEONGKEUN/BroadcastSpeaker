@@ -6,6 +6,6 @@ public class CekMsg {
 			return number+"번 차량 수리완료되었습니다.";
 	}
 	public static String callGrpMemName(String name) {
-		return name+"님 고객대기실로 와주세요.";
+		return name+"님  사무실로 와주세요.";
 }
 }

@@ -122,7 +122,7 @@ public class ClientService implements IClientService{
 			
 			
 			
-			callsVoMapService.offer(id, place, grpMemName, "grpMemName",fileName);
+			callsVoMapService.offer(id, "전체", grpMemName, "grpMemName",fileName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
