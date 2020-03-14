@@ -23,7 +23,7 @@ import com.poseungcar.broadcastspeaker.DTO.Member;
 import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
 import com.poseungcar.broadcastspeaker.service.IClientService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
-import com.poseungcar.broadcastspeaker.util.CekMsg;
+import com.poseungcar.broadcastspeaker.util.CPVMsg;
 
 @RestController
 public class ClientController {

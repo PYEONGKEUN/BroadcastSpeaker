@@ -14,7 +14,7 @@ import com.poseungcar.broadcastspeaker.DTO.Member;
 import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
 import com.poseungcar.broadcastspeaker.service.IClientService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
-import com.poseungcar.broadcastspeaker.util.CekMsg;
+import com.poseungcar.broadcastspeaker.util.CPVMsg;
 import com.poseungcar.broadcastspeaker.util.TimeLib;
 
 
@@ -42,7 +42,7 @@ public class ClientService implements IClientService{
 		logger.info("-----callCarNumber start-----");
 		// TODO Auto-generated method stub
 		try {
-			String msg = CekMsg.callCarNumber(number);
+			String msg = CPVMsg.callCarNumber(number);
 			String fileName;
 			
 			//			
@@ -102,7 +102,7 @@ public class ClientService implements IClientService{
 		logger.info("-----callGrpMemName start-----");
 		
 		try {
-			String msg = CekMsg.callGrpMemName(grpMemName);
+			String msg = CPVMsg.callGrpMemName(grpMemName);
 			String fileName;
 			
 			//			

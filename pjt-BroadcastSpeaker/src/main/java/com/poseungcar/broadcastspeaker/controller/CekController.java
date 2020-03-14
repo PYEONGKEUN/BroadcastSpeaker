@@ -24,7 +24,7 @@ import com.poseungcar.broadcastspeaker.service.ICallsVoMapService;
 import com.poseungcar.broadcastspeaker.service.IClientService;
 import com.poseungcar.broadcastspeaker.service.ITtsService;
 import com.poseungcar.broadcastspeaker.serviceImpl.CallsVoMapService;
-import com.poseungcar.broadcastspeaker.util.CekMsg;
+import com.poseungcar.broadcastspeaker.util.CPVMsg;
 
 
 
@@ -128,7 +128,7 @@ public class CekController {
 					numberValue = (String) namesMap.get("value");
 
 					//인식된 SLOT으로부터 값 추출
-					msg = CekMsg.callCarNumber(numberValue);
+					msg = CPVMsg.callCarNumber(numberValue);
 					result= new MyExtensionMessage("Call", msg, true, "PlainText");
 					clientService.callCarNumber("skvudrms54", placesValue, numberValue);
 					logger.info("resut : "+result.toString());
@@ -182,7 +182,7 @@ public class CekController {
 					numberValue = (String) namesMap.get("value");
 
 					//인식된 SLOT으로부터 값 추출
-					msg = CekMsg.callCarNumber(numberValue);
+					msg = CPVMsg.callCarNumber(numberValue);
 					result= new MyExtensionMessage("Call", msg, true, "PlainText");
 
 
