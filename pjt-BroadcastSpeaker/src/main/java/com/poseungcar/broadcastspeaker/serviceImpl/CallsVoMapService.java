@@ -39,10 +39,10 @@ public class CallsVoMapService implements ICallsVoMapService{
 		}else if(place.equals(PLACES[1])) {				
 			//고객 대기실
 			callsVo.offerCustomerWaitingRoom(msg, type, fileName);
-		}else if(place.equals(PLACES[3])) {
+		}else if(place.equals(PLACES[2])) {
 			//사무실
 			callsVo.offerOffice(msg, type, fileName);
-		}else if(place.equals(PLACES[8])) {
+		}else if(place.equals(PLACES[3])) {
 			//직원휴게실
 			callsVo.offerSeniorCommonRoom(msg, type, fileName);
 		}
