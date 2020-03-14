@@ -39,6 +39,7 @@ public class ClientService implements IClientService{
 
 	@Override
 	public boolean callCarNumber(String id, String place, String number) {
+		logger.info("-----callCarNumber start-----");
 		// TODO Auto-generated method stub
 		try {
 			String msg = CekMsg.callCarNumber(number);
@@ -82,16 +83,20 @@ public class ClientService implements IClientService{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+//			for(StackTraceElement element : e.getStackTrace()) {
+//				
+//			}
+			logger.info(e.getStackTrace().toString());
 		}
 
-
+		logger.info("-----callCarNumber End-----");
 		return true;
 	}
 
 	@Override
 	public boolean callGrpMemName(String id, String place, String grpMemName) {
 		// TODO Auto-generated method stub
-		
+		logger.info("-----callGrpMemName start-----");
 		
 		try {
 			String msg = CekMsg.callGrpMemName(grpMemName);
@@ -101,7 +106,7 @@ public class ClientService implements IClientService{
 			Audio findAudio = new Audio();
 			findAudio.setAudMsg(msg);
 			List<Audio> findAudios = audioDAO.select(findAudio);
-
+			
 
 			//결과가 있을때 없을때 구분		
 			if(findAudios.isEmpty()) {			
@@ -109,6 +114,7 @@ public class ClientService implements IClientService{
 			}else {
 				fileName = findAudios.get(0).getAudName();
 			}
+			logger.info(fileName);
 			//Aduio 테이블에 새로운행 추가
 			Audio insertAudio = new Audio();
 			insertAudio.setAudDatetime(TimeLib.getCurrDateTime());
@@ -135,9 +141,10 @@ public class ClientService implements IClientService{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.info(e.getStackTrace().toString());
 		}
 
-
+		logger.info("-----callGrpMemName End-----");
 		return true;
 	}
 

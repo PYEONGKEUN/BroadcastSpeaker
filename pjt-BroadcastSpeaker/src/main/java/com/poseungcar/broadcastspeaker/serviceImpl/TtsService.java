@@ -41,10 +41,12 @@ public class TtsService implements ITtsService{
 
 	//callsVO 큐에 파일이름(경로 X)을 추가하고 TTS를 다운 로드 
 	public String downloadMP3(String msg, String id) {
+		logger.info("-----downloadMP3 start-----");
 		String clientId = "quktzpx0ng";//애플리케이션 클라이언트 아이디값";
 		String result = "";
 		String clientSecret = "JYlINeOp2s6fNfvxNCLE1IIihw4yyYcXXCxnEltX";//애플리케이션 클라이언트 시크릿값";
 		try {
+			
 			String text = URLEncoder.encode(msg, "UTF-8"); // 13자
 			String apiURL = "https://naveropenapi.apigw.ntruss.com/voice-premium/v1/tts";
 			URL url = new URL(apiURL);
@@ -59,7 +61,9 @@ public class TtsService implements ITtsService{
 			wr.writeBytes(postParams);
 			wr.flush();
 			wr.close();
+			logger.info("-----postParams : "+postParams+"-----");
 			int responseCode = con.getResponseCode();
+			logger.info("-----responseCode : "+responseCode+"-----");
 			BufferedReader br;
 			if(responseCode==200) { // 정상 호출
 				InputStream is = con.getInputStream();
@@ -105,12 +109,9 @@ public class TtsService implements ITtsService{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("-------------------------------");
-			logger.error(e.getMessage());
-			logger.error(e.getCause().toString());
 			logger.error(e.getStackTrace().toString());
-			logger.error("-------------------------------");	
 		}
+		logger.info("-----downloadMP3 end-----");
 		return result;
 	}
 	
