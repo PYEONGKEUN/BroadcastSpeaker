@@ -54,9 +54,9 @@ public class TtsService implements ITtsService{
 			con.setRequestMethod("POST");
 			con.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clientId);
 			con.setRequestProperty("X-NCP-APIGW-API-KEY", clientSecret);
-			String speed = "";
+			String speed = "-3";
 			// post request
-			String postParams = "speaker=nara&volume=0&speed=0.7&pitch=0&emotion=0&format=mp3&text=" + text;
+			String postParams = "speaker=nara&volume=0&speed="+speed+"&pitch=0&emotion=0&format=mp3&text=" + text;
 			con.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 			wr.writeBytes(postParams);
