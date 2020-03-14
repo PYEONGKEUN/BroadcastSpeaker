@@ -83,10 +83,9 @@ public class ClientService implements IClientService{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-//			for(StackTraceElement element : e.getStackTrace()) {
-//				
-//			}
-			logger.info(e.getStackTrace().toString());
+			for(StackTraceElement element : e.getStackTrace()) {
+				logger.error(element.toString());
+			}
 		}
 
 		logger.info("-----callCarNumber End-----");
@@ -141,7 +140,9 @@ public class ClientService implements IClientService{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			logger.info(e.getStackTrace().toString());
+			for(StackTraceElement element : e.getStackTrace()) {
+				logger.error(element.toString());
+			}
 		}
 
 		logger.info("-----callGrpMemName End-----");

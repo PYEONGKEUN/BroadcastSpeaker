@@ -66,6 +66,7 @@ public class TtsService implements ITtsService{
 			logger.info("-----responseCode : "+responseCode+"-----");
 			BufferedReader br;
 			if(responseCode==200) { // 정상 호출
+				logger.info("-----Request Complete and start download tts-----");
 				InputStream is = con.getInputStream();
 				int read = 0;
 				byte[] bytes = new byte[1024];
@@ -108,8 +109,9 @@ public class TtsService implements ITtsService{
 				System.out.println(response.toString());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getStackTrace().toString());
+			for(StackTraceElement element : e.getStackTrace()) {
+				logger.error(element.toString());
+			}
 		}
 		logger.info("-----downloadMP3 end-----");
 		return result;
