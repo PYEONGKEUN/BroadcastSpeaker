@@ -60,7 +60,7 @@ public class RootConfig {
 		ds.setValidationQuery("select 1");
 		ds.setMinEvictableIdleTimeMillis(60000*3);
 		ds.setTimeBetweenEvictionRunsMillis(10*1000);
-		ds.setValidationQueryTimeout(2880);
+		ds.setValidationQueryTimeout(60000*60*4);
 		
 		
 		return ds;
