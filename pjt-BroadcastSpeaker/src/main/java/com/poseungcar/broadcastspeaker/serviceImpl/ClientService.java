@@ -141,7 +141,7 @@ public class ClientService implements IClientService{
 			logger.info(insertAudio.toString());
 			
 			
-			callsVoMapService.offer(id, "전체", grpMemName, "grpMemName",fileName);
+			callsVoMapService.offer(id, place, grpMemName, "grpMemName",fileName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
