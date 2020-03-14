@@ -52,8 +52,11 @@ public class ClientService implements IClientService{
 
 
 			//결과가 있을때 없을때 구분		
-			if(findAudios.isEmpty()) {			
-				fileName = ttsService.downloadMP3(msg,id);			
+			if(findAudios.isEmpty()) {
+				
+				if((fileName = ttsService.downloadMP3(msg,id)) == null) 
+					return false;
+				
 			}else {
 				fileName = findAudios.get(0).getAudName();
 			}
@@ -86,6 +89,7 @@ public class ClientService implements IClientService{
 			for(StackTraceElement element : e.getStackTrace()) {
 				logger.error(element.toString());
 			}
+			return false;
 		}
 
 		logger.info("-----callCarNumber End-----");
@@ -109,7 +113,8 @@ public class ClientService implements IClientService{
 
 			//결과가 있을때 없을때 구분		
 			if(findAudios.isEmpty()) {			
-				fileName = ttsService.downloadMP3(msg,id);			
+				if((fileName = ttsService.downloadMP3(msg,id)) == null) 
+					return false;		
 			}else {
 				fileName = findAudios.get(0).getAudName();
 			}
@@ -143,6 +148,7 @@ public class ClientService implements IClientService{
 			for(StackTraceElement element : e.getStackTrace()) {
 				logger.error(element.toString());
 			}
+			return false;
 		}
 
 		logger.info("-----callGrpMemName End-----");

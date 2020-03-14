@@ -111,6 +111,7 @@ public class TtsService implements ITtsService{
 		} catch (Exception e) {
 			for(StackTraceElement element : e.getStackTrace()) {
 				logger.error(element.toString());
+				return null;
 			}
 		}
 		logger.info("-----downloadMP3 end-----");
